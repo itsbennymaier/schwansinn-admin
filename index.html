@@ -440,7 +440,9 @@ async function saveEntry() {
   try {
     let body = {};
     if (currentType === 'termin') {
-      body = {titel: v('f-titel'), datum: v('f-datum'), uhrzeit_von: v('f-von'), uhrzeit_bis: v('f-bis'), ort: v('f-ort'), adresse: v('f-adresse'), maps_link: v('f-maps'), eintritt_frei: cb('f-frei')};
+      const datumRaw = v('f-datum');
+      const datumISO = datumRaw.includes('/') ? datumRaw.split('/').reverse().join('-') : datumRaw;
+      body = {titel: v('f-titel'), datum: datumISO, uhrzeit_von: v('f-von'), uhrzeit_bis: v('f-bis'), ort: v('f-ort'), adresse: v('f-adresse'), maps_link: v('f-maps'), eintritt_frei: cb('f-frei')};
       if (!body.titel || !body.datum) { toast('Bitte Titel und Datum ausfüllen.', 'err'); return; }
     } else if (currentType === 'galerie') {
       body = {titel: v('f-titel'), jahr: num('f-jahr'), breit: cb('f-breit'), reihenfolge: num('f-sort'), bild_url: uploadedImageUrl};
