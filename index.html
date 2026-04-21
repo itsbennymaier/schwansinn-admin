@@ -8,18 +8,19 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--a:#f9b235;--bg:#0a0a0a;--s1:#111;--s2:#1a1a1a;--bd:#272727;--t:#f0ede6;--m:#888;--r:8px;--red:#e05252;--green:#52c97a}
 body{background:var(--bg);color:var(--t);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.5}
-a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer}
 input,select,textarea{font-family:inherit}
 
-/* LOGIN */
 #login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;padding:1.5rem}
 .login-box{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:2.5rem;width:100%;max-width:380px}
 .login-logo{font-size:1.3rem;font-weight:900;color:var(--a);margin-bottom:.25rem}
 .login-sub{font-size:.82rem;color:var(--m);margin-bottom:2rem}
-.login-box h2{font-size:1rem;font-weight:700;margin-bottom:1.25rem}
+.lg-fg{display:grid;gap:.3rem;margin-bottom:.875rem}
+.lg-fg label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m)}
+.lg-fg input{background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:.68rem .9rem;color:var(--t);font-size:.9rem;width:100%;transition:border-color .2s}
+.lg-fg input:focus{outline:none;border-color:var(--a)}
+.err-msg{color:var(--red);font-size:.8rem;margin-bottom:.75rem;display:none}
 
-/* LAYOUT */
 #app{display:none;min-height:100vh}
 header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .h-logo{font-size:1rem;font-weight:900;color:var(--a)}
@@ -27,18 +28,15 @@ header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.
 .btn-logout{font-size:.78rem;color:var(--m);border:1px solid var(--bd);padding:.3rem .75rem;border-radius:5px;background:none;cursor:pointer;transition:color .2s,border-color .2s}
 .btn-logout:hover{color:var(--t);border-color:var(--m)}
 
-/* TABS */
-.tabs{display:flex;gap:0;border-bottom:1px solid var(--bd);background:var(--s1);padding:0 1.5rem}
+.tabs{display:flex;border-bottom:1px solid var(--bd);background:var(--s1);padding:0 1.5rem}
 .tab{padding:.75rem 1.25rem;font-size:.82rem;font-weight:600;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s;text-transform:uppercase;letter-spacing:.08em}
 .tab:hover{color:var(--t)}
 .tab.active{color:var(--a);border-bottom-color:var(--a)}
 
-/* CONTENT */
 .content{max-width:1000px;margin:0 auto;padding:2rem 1.5rem}
 .section{display:none}
 .section.active{display:block}
 
-/* CARDS GRID */
 .items-grid{display:grid;gap:.65rem;margin-top:1.5rem}
 .item-card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem}
 .item-card img{width:52px;height:52px;object-fit:cover;border-radius:6px;background:var(--s2);flex-shrink:0}
@@ -48,8 +46,7 @@ header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.
 .item-sub{font-size:.78rem;color:var(--m);margin-top:.15rem}
 .item-actions{display:flex;gap:.5rem;flex-shrink:0}
 
-/* BUTTONS */
-.btn{padding:.5rem 1.1rem;border-radius:6px;font-size:.82rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+.btn{padding:.5rem 1.1rem;border-radius:6px;font-size:.82rem;font-weight:700;border:none;cursor:pointer;transition:all .2s}
 .btn-primary{background:var(--a);color:#000}
 .btn-primary:hover{background:#ffca5a}
 .btn-sm{padding:.35rem .8rem;font-size:.75rem}
@@ -60,12 +57,10 @@ header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.
 .btn-outline{background:none;border:1px solid var(--bd);color:var(--t)}
 .btn-outline:hover{border-color:var(--a);color:var(--a)}
 
-/* SECTION HEADER */
 .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}
 .sec-title{font-size:1.2rem;font-weight:800}
 .sec-count{font-size:.8rem;color:var(--m);margin-top:.2rem}
 
-/* FORM / MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:flex;align-items:center;justify-content:center;padding:1.5rem}
 .modal{background:var(--s1);border:1px solid var(--bd);border-radius:12px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto}
 .modal-head{padding:1.25rem 1.5rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--s1);z-index:1}
@@ -75,7 +70,6 @@ header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.
 .modal-body{padding:1.5rem}
 .modal-footer{padding:1rem 1.5rem;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:.65rem}
 
-/* FORM FIELDS */
 .fg{display:grid;gap:.3rem;margin-bottom:1rem}
 .fg label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m);font-weight:600}
 .fg input,.fg select,.fg textarea{background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:.65rem .875rem;color:var(--t);font-size:.9rem;width:100%;transition:border-color .2s}
@@ -84,58 +78,42 @@ header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.
 .fg select{cursor:pointer;-webkit-appearance:none}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
 .fg-hint{font-size:.72rem;color:var(--m);margin-top:.3rem}
-.fg-check{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
-.fg-check input[type=checkbox]{width:16px;height:16px;accent-color:var(--a);cursor:pointer}
-.fg-check label{font-size:.88rem;cursor:pointer}
+.check-row{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
+.check-row input{width:16px;height:16px;accent-color:var(--a);cursor:pointer}
+.check-row label{font-size:.88rem;cursor:pointer}
 
-/* IMAGE UPLOAD */
-.img-upload{border:2px dashed var(--bd);border-radius:var(--r);padding:1.5rem;text-align:center;cursor:pointer;transition:border-color .2s;margin-bottom:.5rem}
+.img-upload{border:2px dashed var(--bd);border-radius:var(--r);padding:1.5rem;text-align:center;cursor:pointer;transition:border-color .2s}
 .img-upload:hover{border-color:var(--a)}
 .img-upload input{display:none}
 .img-upload-icon{font-size:2rem;color:var(--m);margin-bottom:.5rem}
 .img-upload-txt{font-size:.82rem;color:var(--m)}
 .img-upload-txt strong{color:var(--a)}
-.img-preview{width:100%;max-height:160px;object-fit:cover;border-radius:6px;margin-top:.75rem;display:none}
+.img-preview{width:100%;max-height:160px;object-fit:cover;border-radius:6px;margin-top:.75rem}
 .upload-progress{height:3px;background:var(--bd);border-radius:2px;margin-top:.5rem;display:none}
-.upload-progress-bar{height:100%;background:var(--a);border-radius:2px;width:0;transition:width .3s}
+.upload-bar{height:100%;background:var(--a);border-radius:2px;width:0;transition:width .3s}
 
-/* STATUS */
 .toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:.875rem 1.25rem;font-size:.85rem;z-index:1000;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;max-width:320px}
 .toast.show{opacity:1;transform:none}
 .toast.ok{border-left:3px solid var(--green);color:var(--green)}
 .toast.err{border-left:3px solid var(--red);color:var(--red)}
 .loading{color:var(--m);font-size:.88rem;padding:2rem 0;text-align:center}
 .empty{color:var(--m);font-size:.88rem;padding:2rem;text-align:center;background:var(--s1);border-radius:var(--r);border:1px solid var(--bd)}
-
-/* FORM: checkbox row */
-.check-row{display:flex;align-items:center;gap:.6rem;padding:.65rem 0}
-.check-row input{width:16px;height:16px;accent-color:var(--a)}
-.check-row label{font-size:.88rem}
-
-/* Login form */
-.lg-fg{display:grid;gap:.3rem;margin-bottom:.875rem}
-.lg-fg label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m)}
-.lg-fg input{background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:.68rem .9rem;color:var(--t);font-size:.9rem;width:100%;transition:border-color .2s}
-.lg-fg input:focus{outline:none;border-color:var(--a)}
-.err-msg{color:var(--red);font-size:.8rem;margin-bottom:.75rem;display:none}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">Schwansinn</div>
     <div class="login-sub">Admin-Panel</div>
-    <h2>Anmelden</h2>
+    <h2 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Anmelden</h2>
     <div class="lg-fg"><label>E-Mail</label><input type="email" id="lg-email" placeholder="deine@email.de"></div>
     <div class="lg-fg"><label>Passwort</label><input type="password" id="lg-pw" placeholder="••••••••"></div>
     <div class="err-msg" id="lg-err">E-Mail oder Passwort falsch.</div>
-    <button class="btn btn-primary" style="width:100%;padding:.75rem;font-size:.92rem" onclick="login()">Anmelden</button>
+    <button class="btn btn-primary" style="width:100%;padding:.75rem;font-size:.92rem" id="lg-btn" onclick="login()">Anmelden</button>
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
   <header>
     <div class="h-logo">Schwansinn Admin</div>
@@ -144,14 +122,11 @@ header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.
       <button class="btn-logout" onclick="logout()">Abmelden</button>
     </div>
   </header>
-
   <div class="tabs">
     <div class="tab active" onclick="switchTab('termine')">🗓 Termine</div>
     <div class="tab" onclick="switchTab('galerie')">🖼 Galerie</div>
     <div class="tab" onclick="switchTab('musiker')">🎺 Musiker</div>
   </div>
-
-  <!-- TERMINE -->
   <div class="content">
     <div class="section active" id="sec-termine">
       <div class="sec-head">
@@ -160,8 +135,6 @@ header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.
       </div>
       <div class="items-grid" id="list-termine"><div class="loading">Lade Termine…</div></div>
     </div>
-
-    <!-- GALERIE -->
     <div class="section" id="sec-galerie">
       <div class="sec-head">
         <div><div class="sec-title">Galerie</div><div class="sec-count" id="cnt-galerie"></div></div>
@@ -169,8 +142,6 @@ header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.
       </div>
       <div class="items-grid" id="list-galerie"><div class="loading">Lade Galerie…</div></div>
     </div>
-
-    <!-- MUSIKER -->
     <div class="section" id="sec-musiker">
       <div class="sec-head">
         <div><div class="sec-title">Musiker</div><div class="sec-count" id="cnt-musiker"></div></div>
@@ -181,9 +152,8 @@ header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.
   </div>
 </div>
 
-<!-- MODAL -->
-<div class="modal-bg" id="modal-bg" style="display:none" onclick="e=>{if(e.target===this)closeModal()}">
-  <div class="modal" id="modal">
+<div class="modal-bg" id="modal-bg" style="display:none">
+  <div class="modal">
     <div class="modal-head">
       <h3 id="modal-title">Eintrag</h3>
       <button class="modal-close" onclick="closeModal()">×</button>
@@ -196,7 +166,6 @@ header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
@@ -208,44 +177,111 @@ let currentType = null;
 let editingId = null;
 let uploadedImageUrl = null;
 
-// ── SUPABASE HELPERS ──
-async function sbFetch(path, opts={}) {
-  const headers = {'apikey': SB_KEY, 'Content-Type': 'application/json'};
+// ── HELPERS ──
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+function chk(id) {
+  const el = document.getElementById(id);
+  return el ? el.checked : false;
+}
+function num(id) {
+  return parseInt(document.getElementById(id)?.value) || 0;
+}
+function parseDate(raw) {
+  if (!raw) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  if (/^\d{2}\/\d{2}\/\d{4}$/.test(raw)) {
+    const p = raw.split('/');
+    return p[2] + '-' + p[1] + '-' + p[0];
+  }
+  if (/^\d{2}\.\d{2}\.\d{4}$/.test(raw)) {
+    const p = raw.split('.');
+    return p[2] + '-' + p[1] + '-' + p[0];
+  }
+  const d = new Date(raw);
+  if (!isNaN(d)) return d.toISOString().split('T')[0];
+  return raw;
+}
+function formatDate(d) {
+  if (!d) return '';
+  const dt = new Date(d + 'T12:00:00');
+  return dt.toLocaleDateString('de-DE', {day:'2-digit', month:'long', year:'numeric'});
+}
+function toast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast ' + (type||'ok') + ' show';
+  setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+// ── SUPABASE ──
+async function sbFetch(path, opts) {
+  opts = opts || {};
+  const headers = {
+    'apikey': SB_KEY,
+    'Content-Type': 'application/json'
+  };
   if (token) headers['Authorization'] = 'Bearer ' + token;
-  const r = await fetch(SB_URL + path, {...opts, headers: {...headers, ...opts.headers}});
-  if (!r.ok) { const e = await r.json().catch(()=>({})); throw new Error(e.message||r.statusText); }
-  return r.status === 204 ? null : r.json();
+  if (opts.headers) Object.assign(headers, opts.headers);
+  const res = await fetch(SB_URL + path, {
+    method: opts.method || 'GET',
+    headers: headers,
+    body: opts.body || undefined
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || err.error_description || res.statusText);
+  }
+  if (res.status === 204) return null;
+  return res.json();
 }
 
 async function uploadImage(file) {
   const ext = file.name.split('.').pop();
-  const name = `${Date.now()}.${ext}`;
-  const headers = {'apikey': SB_KEY, 'Authorization': 'Bearer ' + token, 'Content-Type': file.type};
-  const r = await fetch(`${SB_URL}/storage/v1/object/bilder/${name}`, {method:'POST', headers, body: file});
-  if (!r.ok) throw new Error('Bild-Upload fehlgeschlagen');
-  return `${SB_URL}/storage/v1/object/public/bilder/${name}`;
+  const name = Date.now() + '.' + ext;
+  const res = await fetch(SB_URL + '/storage/v1/object/bilder/' + name, {
+    method: 'POST',
+    headers: {
+      'apikey': SB_KEY,
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': file.type
+    },
+    body: file
+  });
+  if (!res.ok) throw new Error('Bild-Upload fehlgeschlagen');
+  return SB_URL + '/storage/v1/object/public/bilder/' + name;
 }
 
 // ── AUTH ──
 async function login() {
   const email = document.getElementById('lg-email').value.trim();
   const pw = document.getElementById('lg-pw').value;
-  document.getElementById('lg-err').style.display = 'none';
+  const errEl = document.getElementById('lg-err');
+  const btn = document.getElementById('lg-btn');
+  errEl.style.display = 'none';
+  btn.textContent = 'Anmelden…';
+  btn.disabled = true;
   try {
-    const r = await fetch(`${SB_URL}/auth/v1/token?grant_type=password`, {
+    const res = await fetch(SB_URL + '/auth/v1/token?grant_type=password', {
       method: 'POST',
       headers: {'apikey': SB_KEY, 'Content-Type': 'application/json'},
-      body: JSON.stringify({email, password: pw})
+      body: JSON.stringify({email: email, password: pw})
     });
-    const d = await r.json();
-    if (!r.ok) throw new Error(d.error_description || d.msg);
-    token = d.access_token;
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error_description || data.msg || 'Fehler');
+    token = data.access_token;
     document.getElementById('user-email').textContent = email;
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     loadAll();
   } catch(e) {
-    document.getElementById('lg-err').style.display = 'block';
+    errEl.style.display = 'block';
+    errEl.textContent = e.message || 'E-Mail oder Passwort falsch.';
+  } finally {
+    btn.textContent = 'Anmelden';
+    btn.disabled = false;
   }
 }
 
@@ -255,17 +291,28 @@ function logout() {
   document.getElementById('app').style.display = 'none';
 }
 
-document.getElementById('lg-pw').addEventListener('keydown', e => { if(e.key==='Enter') login(); });
+document.getElementById('lg-pw').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') login();
+});
 
 // ── TABS ──
 function switchTab(name) {
-  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active', ['termine','galerie','musiker'][i]===name));
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('sec-'+name).classList.add('active');
+  var tabs = ['termine','galerie','musiker'];
+  document.querySelectorAll('.tab').forEach(function(t, i) {
+    t.classList.toggle('active', tabs[i] === name);
+  });
+  document.querySelectorAll('.section').forEach(function(s) {
+    s.classList.remove('active');
+  });
+  document.getElementById('sec-' + name).classList.add('active');
 }
 
-// ── LOAD DATA ──
-async function loadAll() { await Promise.all([loadTermine(), loadGalerie(), loadMusiker()]); }
+// ── LOAD ──
+function loadAll() {
+  loadTermine();
+  loadGalerie();
+  loadMusiker();
+}
 
 async function loadTermine() {
   const el = document.getElementById('list-termine');
@@ -273,19 +320,19 @@ async function loadTermine() {
     const data = await sbFetch('/rest/v1/termine?select=*&order=datum.desc');
     document.getElementById('cnt-termine').textContent = data.length + ' Einträge';
     if (!data.length) { el.innerHTML = '<div class="empty">Noch keine Termine eingetragen.</div>'; return; }
-    el.innerHTML = data.map(t => `
-      <div class="item-card">
-        <div class="item-thumb-ph">🗓</div>
-        <div class="item-info">
-          <div class="item-name">${t.titel}</div>
-          <div class="item-sub">${formatDate(t.datum)} · ${t.uhrzeit_von||''} – ${t.uhrzeit_bis||''} · ${t.ort||''}</div>
-        </div>
-        <div class="item-actions">
-          <button class="btn btn-sm btn-edit" onclick='editEntry("termin","${t.id}")'>Bearbeiten</button>
-          <button class="btn btn-sm btn-del" onclick='deleteEntry("termine","${t.id}", loadTermine)'>Löschen</button>
-        </div>
-      </div>`).join('');
-  } catch(e) { el.innerHTML = '<div class="empty">Fehler beim Laden.</div>'; }
+    el.innerHTML = data.map(function(t) {
+      return '<div class="item-card">' +
+        '<div class="item-thumb-ph">🗓</div>' +
+        '<div class="item-info">' +
+          '<div class="item-name">' + t.titel + '</div>' +
+          '<div class="item-sub">' + formatDate(t.datum) + ' · ' + (t.uhrzeit_von||'') + (t.uhrzeit_bis?' – '+t.uhrzeit_bis:'') + (t.ort?' · '+t.ort:'') + '</div>' +
+        '</div>' +
+        '<div class="item-actions">' +
+          '<button class="btn btn-sm btn-edit" onclick="editEntry(\'termin\',\'' + t.id + '\')">Bearbeiten</button>' +
+          '<button class="btn btn-sm btn-del" onclick="deleteEntry(\'termine\',\'' + t.id + '\',loadTermine)">Löschen</button>' +
+        '</div></div>';
+    }).join('');
+  } catch(e) { el.innerHTML = '<div class="empty">Fehler: ' + e.message + '</div>'; }
 }
 
 async function loadGalerie() {
@@ -293,20 +340,20 @@ async function loadGalerie() {
   try {
     const data = await sbFetch('/rest/v1/galerie?select=*&order=reihenfolge.asc');
     document.getElementById('cnt-galerie').textContent = data.length + ' Einträge';
-    if (!data.length) { el.innerHTML = '<div class="empty">Noch keine Bilder eingetragen.</div>'; return; }
-    el.innerHTML = data.map(g => `
-      <div class="item-card">
-        ${g.bild_url ? `<img src="${g.bild_url}" alt="${g.titel}">` : '<div class="item-thumb-ph">🖼</div>'}
-        <div class="item-info">
-          <div class="item-name">${g.titel}</div>
-          <div class="item-sub">${g.jahr||''} ${g.breit?'· Panorama':''}</div>
-        </div>
-        <div class="item-actions">
-          <button class="btn btn-sm btn-edit" onclick='editEntry("galerie","${g.id}")'>Bearbeiten</button>
-          <button class="btn btn-sm btn-del" onclick='deleteEntry("galerie","${g.id}", loadGalerie)'>Löschen</button>
-        </div>
-      </div>`).join('');
-  } catch(e) { el.innerHTML = '<div class="empty">Fehler beim Laden.</div>'; }
+    if (!data.length) { el.innerHTML = '<div class="empty">Noch keine Fotos eingetragen.</div>'; return; }
+    el.innerHTML = data.map(function(g) {
+      return '<div class="item-card">' +
+        (g.bild_url ? '<img src="' + g.bild_url + '" alt="' + g.titel + '">' : '<div class="item-thumb-ph">🖼</div>') +
+        '<div class="item-info">' +
+          '<div class="item-name">' + g.titel + '</div>' +
+          '<div class="item-sub">' + (g.jahr||'') + (g.breit?' · Panorama':'') + '</div>' +
+        '</div>' +
+        '<div class="item-actions">' +
+          '<button class="btn btn-sm btn-edit" onclick="editEntry(\'galerie\',\'' + g.id + '\')">Bearbeiten</button>' +
+          '<button class="btn btn-sm btn-del" onclick="deleteEntry(\'galerie\',\'' + g.id + '\',loadGalerie)">Löschen</button>' +
+        '</div></div>';
+    }).join('');
+  } catch(e) { el.innerHTML = '<div class="empty">Fehler: ' + e.message + '</div>'; }
 }
 
 async function loadMusiker() {
@@ -315,27 +362,29 @@ async function loadMusiker() {
     const data = await sbFetch('/rest/v1/musiker?select=*&order=reihenfolge.asc');
     document.getElementById('cnt-musiker').textContent = data.length + ' Einträge';
     if (!data.length) { el.innerHTML = '<div class="empty">Noch keine Musiker eingetragen.</div>'; return; }
-    el.innerHTML = data.map(m => `
-      <div class="item-card">
-        ${m.bild_url ? `<img src="${m.bild_url}" alt="${m.name}">` : `<div class="item-thumb-ph">${m.name.split(' ').map(w=>w[0]).join('').slice(0,2)}</div>`}
-        <div class="item-info">
-          <div class="item-name">${m.name}</div>
-          <div class="item-sub">${m.instrument||''} · ${m.register||''}</div>
-        </div>
-        <div class="item-actions">
-          <button class="btn btn-sm btn-edit" onclick='editEntry("musiker","${m.id}")'>Bearbeiten</button>
-          <button class="btn btn-sm btn-del" onclick='deleteEntry("musiker","${m.id}", loadMusiker)'>Löschen</button>
-        </div>
-      </div>`).join('');
-  } catch(e) { el.innerHTML = '<div class="empty">Fehler beim Laden.</div>'; }
+    el.innerHTML = data.map(function(m) {
+      var ini = m.name.split(' ').map(function(w){return w[0];}).join('').slice(0,2);
+      return '<div class="item-card">' +
+        (m.bild_url ? '<img src="' + m.bild_url + '" alt="' + m.name + '">' : '<div class="item-thumb-ph">' + ini + '</div>') +
+        '<div class="item-info">' +
+          '<div class="item-name">' + m.name + '</div>' +
+          '<div class="item-sub">' + (m.instrument||'') + (m.register?' · '+m.register:'') + '</div>' +
+        '</div>' +
+        '<div class="item-actions">' +
+          '<button class="btn btn-sm btn-edit" onclick="editEntry(\'musiker\',\'' + m.id + '\')">Bearbeiten</button>' +
+          '<button class="btn btn-sm btn-del" onclick="deleteEntry(\'musiker\',\'' + m.id + '\',loadMusiker)">Löschen</button>' +
+        '</div></div>';
+    }).join('');
+  } catch(e) { el.innerHTML = '<div class="empty">Fehler: ' + e.message + '</div>'; }
 }
 
 // ── MODAL ──
-function openModal(type, data={}) {
+function openModal(type, data) {
+  data = data || {};
   currentType = type;
   editingId = data.id || null;
   uploadedImageUrl = data.bild_url || null;
-  const titles = {termin: editingId?'Termin bearbeiten':'Neuer Termin', galerie: editingId?'Foto bearbeiten':'Neues Foto', musiker: editingId?'Musiker bearbeiten':'Neuer Musiker'};
+  var titles = {termin: editingId?'Termin bearbeiten':'Neuer Termin', galerie: editingId?'Foto bearbeiten':'Neues Foto', musiker: editingId?'Musiker bearbeiten':'Neuer Musiker'};
   document.getElementById('modal-title').textContent = titles[type];
   document.getElementById('modal-body').innerHTML = buildForm(type, data);
   document.getElementById('modal-bg').style.display = 'flex';
@@ -347,74 +396,64 @@ function closeModal() {
   currentType = null; editingId = null; uploadedImageUrl = null;
 }
 
-function buildForm(type, d={}) {
-  if (type === 'termin') return `
-    <div class="fg"><label>Titel *</label><input id="f-titel" value="${d.titel||''}" placeholder="Sommerfest Musterverein"></div>
-    <div class="frow">
-      <div class="fg"><label>Datum *</label><input id="f-datum" type="date" value="${d.datum||''}"></div>
-      <div class="fg"><label>Uhrzeit von</label><input id="f-von" value="${d.uhrzeit_von||''}" placeholder="19:00"></div>
-    </div>
-    <div class="fg"><label>Uhrzeit bis</label><input id="f-bis" value="${d.uhrzeit_bis||''}" placeholder="22:00"></div>
-    <div class="fg"><label>Ort / Veranstaltungsname</label><input id="f-ort" value="${d.ort||''}" placeholder="Festplatz Musterhausen"></div>
-    <div class="fg"><label>Adresse</label><input id="f-adresse" value="${d.adresse||''}" placeholder="Musterstraße 1, 12345 Musterstadt"></div>
-    <div class="fg"><label>Google Maps Link</label><input id="f-maps" value="${d.maps_link||''}" placeholder="https://maps.google.com/..."></div>
-    <div class="check-row"><input type="checkbox" id="f-frei" ${d.eintritt_frei?'checked':''}><label for="f-frei">Freier Eintritt</label></div>`;
+document.getElementById('modal-bg').addEventListener('click', function(e) {
+  if (e.target === document.getElementById('modal-bg')) closeModal();
+});
 
-  if (type === 'galerie') return `
-    <div class="fg"><label>Titel *</label><input id="f-titel" value="${d.titel||''}" placeholder="Sommerfest Stadtmusik Schwenningen"></div>
-    <div class="frow">
-      <div class="fg"><label>Jahr</label><input id="f-jahr" type="number" value="${d.jahr||''}" placeholder="2024"></div>
-      <div class="fg"><label>Reihenfolge</label><input id="f-sort" type="number" value="${d.reihenfolge||0}"></div>
-    </div>
-    <div class="check-row"><input type="checkbox" id="f-breit" ${d.breit?'checked':''}><label for="f-breit">Panorama-Format (doppelt breit)</label></div>
-    <div class="fg"><label>Foto hochladen</label>
-      <div class="img-upload" onclick="document.getElementById('img-input').click()">
-        <input type="file" id="img-input" accept="image/*">
-        <div class="img-upload-icon">📷</div>
-        <div class="img-upload-txt">Klicken zum Auswählen<br><strong>JPG, PNG, WEBP</strong> · max. 50 MB</div>
-        <img class="img-preview" id="img-preview" ${d.bild_url?`src="${d.bild_url}" style="display:block"`:''}> 
-      </div>
-      <div class="upload-progress" id="upload-progress"><div class="upload-progress-bar" id="upload-bar"></div></div>
-      <div class="fg-hint" id="upload-status">${d.bild_url?'✓ Bild vorhanden':'Noch kein Bild hochgeladen'}</div>
-    </div>`;
+function buildForm(type, d) {
+  d = d || {};
+  if (type === 'termin') {
+    return '<div class="fg"><label>Titel *</label><input id="f-titel" value="' + (d.titel||'') + '" placeholder="Sommerfest Musterverein"></div>' +
+      '<div class="frow"><div class="fg"><label>Datum *</label><input id="f-datum" type="date" value="' + (d.datum||'') + '"></div>' +
+      '<div class="fg"><label>Uhrzeit von</label><input id="f-von" value="' + (d.uhrzeit_von||'') + '" placeholder="19:00"></div></div>' +
+      '<div class="fg"><label>Uhrzeit bis</label><input id="f-bis" value="' + (d.uhrzeit_bis||'') + '" placeholder="22:00"></div>' +
+      '<div class="fg"><label>Ort / Veranstaltungsname</label><input id="f-ort" value="' + (d.ort||'') + '" placeholder="Festplatz Musterhausen"></div>' +
+      '<div class="fg"><label>Adresse</label><input id="f-adresse" value="' + (d.adresse||'') + '" placeholder="Musterstraße 1, 12345 Musterstadt"></div>' +
+      '<div class="fg"><label>Google Maps Link</label><input id="f-maps" value="' + (d.maps_link||'') + '" placeholder="https://maps.google.com/..."></div>' +
+      '<div class="check-row"><input type="checkbox" id="f-frei"' + (d.eintritt_frei?' checked':'') + '><label for="f-frei">Freier Eintritt</label></div>';
+  }
+  if (type === 'galerie') {
+    return '<div class="fg"><label>Titel *</label><input id="f-titel" value="' + (d.titel||'') + '" placeholder="Sommerfest Stadtmusik Schwenningen"></div>' +
+      '<div class="fg"><label>Jahr</label><input id="f-jahr" type="number" value="' + (d.jahr||'') + '" placeholder="2024"></div>' +
+      '<div class="fg"><label>Reihenfolge</label><input id="f-sort" type="number" value="' + (d.reihenfolge||0) + '"></div>' +
+      '<div class="check-row"><input type="checkbox" id="f-breit"' + (d.breit?' checked':'') + '><label for="f-breit">Panorama-Format (doppelt breit)</label></div>' +
+      imgUploadHTML(d.bild_url);
+  }
+  if (type === 'musiker') {
+    var registers = ['Trompete & Flügelhorn','Holzregister','Mittleres Blech & Horn','Maschinenraum & Gesang'];
+    var opts = registers.map(function(r){ return '<option' + (d.register===r?' selected':'') + '>' + r + '</option>'; }).join('');
+    return '<div class="frow"><div class="fg"><label>Name *</label><input id="f-name" value="' + (d.name||'') + '" placeholder="Max Mustermann"></div>' +
+      '<div class="fg"><label>Reihenfolge</label><input id="f-sort" type="number" value="' + (d.reihenfolge||0) + '"></div></div>' +
+      '<div class="frow"><div class="fg"><label>Instrument</label><input id="f-instrument" value="' + (d.instrument||'') + '" placeholder="Trompete"></div>' +
+      '<div class="fg"><label>Register</label><select id="f-register"><option value="">Bitte wählen</option>' + opts + '</select></div></div>' +
+      '<div class="fg"><label>Beschreibung</label><textarea id="f-beschreibung">' + (d.beschreibung||'') + '</textarea></div>' +
+      imgUploadHTML(d.bild_url);
+  }
+  return '';
+}
 
-  if (type === 'musiker') return `
-    <div class="frow">
-      <div class="fg"><label>Name *</label><input id="f-name" value="${d.name||''}" placeholder="Max Mustermann"></div>
-      <div class="fg"><label>Reihenfolge</label><input id="f-sort" type="number" value="${d.reihenfolge||0}"></div>
-    </div>
-    <div class="frow">
-      <div class="fg"><label>Instrument</label><input id="f-instrument" value="${d.instrument||''}" placeholder="Trompete"></div>
-      <div class="fg"><label>Register</label>
-        <select id="f-register">
-          <option value="">Bitte wählen</option>
-          ${['Trompete & Flügelhorn','Holzregister','Mittleres Blech & Horn','Maschinenraum & Gesang'].map(r=>`<option ${d.register===r?'selected':''}>${r}</option>`).join('')}
-        </select>
-      </div>
-    </div>
-    <div class="fg"><label>Beschreibung</label><textarea id="f-beschreibung">${d.beschreibung||''}</textarea></div>
-    <div class="fg"><label>Foto hochladen</label>
-      <div class="img-upload" onclick="document.getElementById('img-input').click()">
-        <input type="file" id="img-input" accept="image/*">
-        <div class="img-upload-icon">👤</div>
-        <div class="img-upload-txt">Klicken zum Auswählen<br><strong>JPG, PNG, WEBP</strong> · max. 50 MB</div>
-        <img class="img-preview" id="img-preview" ${d.bild_url?`src="${d.bild_url}" style="display:block"`:''}> 
-      </div>
-      <div class="upload-progress" id="upload-progress"><div class="upload-progress-bar" id="upload-bar"></div></div>
-      <div class="fg-hint" id="upload-status">${d.bild_url?'✓ Bild vorhanden':'Noch kein Bild hochgeladen'}</div>
-    </div>`;
+function imgUploadHTML(url) {
+  return '<div class="fg"><label>Foto hochladen</label>' +
+    '<div class="img-upload" onclick="document.getElementById(\'img-input\').click()">' +
+    '<input type="file" id="img-input" accept="image/*">' +
+    '<div class="img-upload-icon">📷</div>' +
+    '<div class="img-upload-txt">Klicken zum Auswählen<br><strong>JPG, PNG, WEBP</strong> · max. 50 MB</div>' +
+    (url ? '<img class="img-preview" id="img-preview" src="' + url + '">' : '<img class="img-preview" id="img-preview" style="display:none">') +
+    '</div>' +
+    '<div class="upload-progress" id="upload-progress"><div class="upload-bar" id="upload-bar"></div></div>' +
+    '<div class="fg-hint" id="upload-status">' + (url?'✓ Bild vorhanden':'Noch kein Bild hochgeladen') + '</div></div>';
 }
 
 function setupImageUpload() {
-  const inp = document.getElementById('img-input');
+  var inp = document.getElementById('img-input');
   if (!inp) return;
-  inp.addEventListener('change', async e => {
-    const file = e.target.files[0];
+  inp.addEventListener('change', async function(e) {
+    var file = e.target.files[0];
     if (!file) return;
-    const preview = document.getElementById('img-preview');
-    const status = document.getElementById('upload-status');
-    const prog = document.getElementById('upload-progress');
-    const bar = document.getElementById('upload-bar');
+    var preview = document.getElementById('img-preview');
+    var status = document.getElementById('upload-status');
+    var prog = document.getElementById('upload-progress');
+    var bar = document.getElementById('upload-bar');
     preview.src = URL.createObjectURL(file);
     preview.style.display = 'block';
     prog.style.display = 'block';
@@ -425,7 +464,7 @@ function setupImageUpload() {
       uploadedImageUrl = await uploadImage(file);
       bar.style.width = '100%';
       status.textContent = '✓ Erfolgreich hochgeladen';
-      setTimeout(()=>prog.style.display='none', 800);
+      setTimeout(function(){ prog.style.display='none'; }, 800);
     } catch(err) {
       status.textContent = '✗ Upload fehlgeschlagen: ' + err.message;
       prog.style.display = 'none';
@@ -435,80 +474,100 @@ function setupImageUpload() {
 
 // ── SAVE ──
 async function saveEntry() {
-  const btn = document.getElementById('modal-save');
-  btn.disabled = true; btn.textContent = 'Speichern…';
+  var btn = document.getElementById('modal-save');
+  btn.disabled = true;
+  btn.textContent = 'Speichern…';
   try {
-    let body = {};
+    var body = {};
+    var table = '';
+
     if (currentType === 'termin') {
-      const dateEl = document.getElementById('f-datum');
-      const raw = dateEl.value || '';
-      let datumISO = '';
-      if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-        datumISO = raw;
-      } else if (/^\d{2}\/\d{2}\/\d{4}$/.test(raw)) {
-        const [d,m,y] = raw.split('/');
-        datumISO = `${y}-${m}-${d}`;
-      } else if (raw) {
-        const p = new Date(raw);
-        if (!isNaN(p)) datumISO = p.toISOString().split('T')[0];
-      }
-      if (!datumISO) { toast('Bitte ein gültiges Datum auswählen.', 'err'); return; }
-      body = {titel: v('f-titel'), datum: datumISO, uhrzeit_von: v('f-von'), uhrzeit_bis: v('f-bis'), ort: v('f-ort'), adresse: v('f-adresse'), maps_link: v('f-maps'), eintritt_frei: cb('f-frei')};
-      if (!body.titel || !body.datum) { toast('Bitte Titel und Datum ausfüllen.', 'err'); return; }
+      table = 'termine';
+      var titel = val('f-titel');
+      var datumRaw = val('f-datum');
+      var datumISO = parseDate(datumRaw);
+      if (!titel) { toast('Bitte Titel ausfüllen.', 'err'); return; }
+      if (!datumISO) { toast('Bitte Datum auswählen.', 'err'); return; }
+      body = {
+        titel: titel,
+        datum: datumISO,
+        uhrzeit_von: val('f-von'),
+        uhrzeit_bis: val('f-bis'),
+        ort: val('f-ort'),
+        adresse: val('f-adresse'),
+        maps_link: val('f-maps'),
+        eintritt_frei: chk('f-frei')
+      };
     } else if (currentType === 'galerie') {
-      body = {titel: v('f-titel'), jahr: num('f-jahr'), breit: cb('f-breit'), reihenfolge: num('f-sort'), bild_url: uploadedImageUrl};
-      if (!body.titel) { toast('Bitte Titel ausfüllen.', 'err'); return; }
+      table = 'galerie';
+      var titel = val('f-titel');
+      if (!titel) { toast('Bitte Titel ausfüllen.', 'err'); return; }
+      body = {
+        titel: titel,
+        jahr: num('f-jahr') || null,
+        breit: chk('f-breit'),
+        reihenfolge: num('f-sort'),
+        bild_url: uploadedImageUrl
+      };
     } else if (currentType === 'musiker') {
-      body = {name: v('f-name'), instrument: v('f-instrument'), register: v('f-register'), beschreibung: v('f-beschreibung'), reihenfolge: num('f-sort'), bild_url: uploadedImageUrl};
-      if (!body.name) { toast('Bitte Name ausfüllen.', 'err'); return; }
+      table = 'musiker';
+      var name = val('f-name');
+      if (!name) { toast('Bitte Name ausfüllen.', 'err'); return; }
+      body = {
+        name: name,
+        instrument: val('f-instrument'),
+        register: val('f-register'),
+        beschreibung: val('f-beschreibung'),
+        reihenfolge: num('f-sort'),
+        bild_url: uploadedImageUrl
+      };
     }
-    const table = {termin:'termine', galerie:'galerie', musiker:'musiker'}[currentType];
+
     if (editingId) {
-      await sbFetch(`/rest/v1/${table}?id=eq.${editingId}`, {method:'PATCH', body: JSON.stringify(body)});
+      await sbFetch('/rest/v1/' + table + '?id=eq.' + editingId, {
+        method: 'PATCH',
+        body: JSON.stringify(body)
+      });
     } else {
-      await sbFetch(`/rest/v1/${table}`, {method:'POST', headers:{'Prefer':'return=minimal'}, body: JSON.stringify(body)});
+      await sbFetch('/rest/v1/' + table, {
+        method: 'POST',
+        headers: {'Prefer': 'return=minimal'},
+        body: JSON.stringify(body)
+      });
     }
+
     toast(editingId ? 'Eintrag aktualisiert!' : 'Eintrag gespeichert!', 'ok');
     closeModal();
-    if (currentType==='termin') loadTermine();
-    else if (currentType==='galerie') loadGalerie();
+    if (currentType === 'termin') loadTermine();
+    else if (currentType === 'galerie') loadGalerie();
     else loadMusiker();
-  } catch(e) { toast('Fehler: ' + e.message, 'err'); }
-  finally { btn.disabled = false; btn.textContent = 'Speichern'; }
+
+  } catch(e) {
+    toast('Fehler: ' + e.message, 'err');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Speichern';
+  }
 }
 
-// ── EDIT ──
+// ── EDIT & DELETE ──
 async function editEntry(type, id) {
-  const table = {termin:'termine', galerie:'galerie', musiker:'musiker'}[type];
+  var table = type === 'termin' ? 'termine' : type;
   try {
-    const data = await sbFetch(`/rest/v1/${table}?id=eq.${id}&select=*`);
+    var data = await sbFetch('/rest/v1/' + table + '?id=eq.' + id + '&select=*');
     openModal(type, data[0]);
     editingId = id;
-  } catch(e) { toast('Fehler beim Laden.', 'err'); }
+  } catch(e) { toast('Fehler beim Laden: ' + e.message, 'err'); }
 }
 
-// ── DELETE ──
 async function deleteEntry(table, id, reload) {
   if (!confirm('Eintrag wirklich löschen?')) return;
   try {
-    await sbFetch(`/rest/v1/${table}?id=eq.${id}`, {method:'DELETE'});
+    await sbFetch('/rest/v1/' + table + '?id=eq.' + id, {method: 'DELETE'});
     toast('Eintrag gelöscht.', 'ok');
     reload();
-  } catch(e) { toast('Fehler beim Löschen.', 'err'); }
+  } catch(e) { toast('Fehler: ' + e.message, 'err'); }
 }
-
-// ── HELPERS ──
-const v = id => (document.getElementById(id)?.value||'').trim();
-const cb = id => document.getElementById(id)?.checked || false;
-const num = id => parseInt(document.getElementById(id)?.value)||0;
-function formatDate(d) { if(!d) return ''; const dt = new Date(d); return dt.toLocaleDateString('de-DE',{day:'2-digit',month:'long',year:'numeric'}); }
-function toast(msg, type='ok') {
-  const el = document.getElementById('toast');
-  el.textContent = msg; el.className = `toast ${type} show`;
-  setTimeout(()=>el.classList.remove('show'), 3000);
-}
-
-document.getElementById('modal-bg').addEventListener('click', e => { if(e.target === document.getElementById('modal-bg')) closeModal(); });
 </script>
 </body>
 </html>
