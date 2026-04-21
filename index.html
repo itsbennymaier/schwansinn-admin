@@ -440,8 +440,19 @@ async function saveEntry() {
   try {
     let body = {};
     if (currentType === 'termin') {
-      const datumRaw = v('f-datum');
-      const datumISO = datumRaw.includes('/') ? datumRaw.split('/').reverse().join('-') : datumRaw;
+      const dateEl = document.getElementById('f-datum');
+      const raw = dateEl.value || '';
+      let datumISO = '';
+      if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+        datumISO = raw;
+      } else if (/^\d{2}\/\d{2}\/\d{4}$/.test(raw)) {
+        const [d,m,y] = raw.split('/');
+        datumISO = `${y}-${m}-${d}`;
+      } else if (raw) {
+        const p = new Date(raw);
+        if (!isNaN(p)) datumISO = p.toISOString().split('T')[0];
+      }
+      if (!datumISO) { toast('Bitte ein gültiges Datum auswählen.', 'err'); return; }
       body = {titel: v('f-titel'), datum: datumISO, uhrzeit_von: v('f-von'), uhrzeit_bis: v('f-bis'), ort: v('f-ort'), adresse: v('f-adresse'), maps_link: v('f-maps'), eintritt_frei: cb('f-frei')};
       if (!body.titel || !body.datum) { toast('Bitte Titel und Datum ausfüllen.', 'err'); return; }
     } else if (currentType === 'galerie') {
