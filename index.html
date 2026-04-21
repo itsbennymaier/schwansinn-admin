@@ -6,162 +6,174 @@
 <title>Schwansinn Admin</title>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--a:#f9b235;--bg:#0a0a0a;--s1:#111;--s2:#1a1a1a;--bd:#272727;--t:#f0ede6;--m:#888;--r:8px;--red:#e05252;--green:#52c97a}
-body{background:var(--bg);color:var(--t);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.5}
-button{font-family:inherit;cursor:pointer}
-input,select,textarea{font-family:inherit}
+:root{
+  --a:#f9b235;--a2:#ffca5a;
+  --bg:#0a0a0a;--s1:#111111;--s2:#1a1a1a;
+  --bd:#272727;--t:#f0ede6;--m:#888888;
+  --red:#e05252;--grn:#52c97a;--r:8px;
+}
+body{background:var(--bg);color:var(--t);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.55}
+button,input,select,textarea{font-family:inherit;font-size:inherit}
+input,select,textarea{background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:.65rem .875rem;color:var(--t);width:100%;transition:border-color .2s;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--a)}
+textarea{resize:vertical;min-height:90px}
+select{cursor:pointer}
 
-#login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;padding:1.5rem}
-.login-box{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:2.5rem;width:100%;max-width:380px}
-.login-logo{font-size:1.3rem;font-weight:900;color:var(--a);margin-bottom:.25rem}
-.login-sub{font-size:.82rem;color:var(--m);margin-bottom:2rem}
-.lg-fg{display:grid;gap:.3rem;margin-bottom:.875rem}
-.lg-fg label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m)}
-.lg-fg input{background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:.68rem .9rem;color:var(--t);font-size:.9rem;width:100%;transition:border-color .2s}
-.lg-fg input:focus{outline:none;border-color:var(--a)}
-.err-msg{color:var(--red);font-size:.8rem;margin-bottom:.75rem;display:none}
+/* ── LOGIN ── */
+#login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:1.5rem;z-index:999}
+.lbox{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:2.5rem;width:100%;max-width:380px}
+.lbox-brand{font-size:1.3rem;font-weight:900;color:var(--a);margin-bottom:.2rem}
+.lbox-sub{font-size:.82rem;color:var(--m);margin-bottom:2rem}
+.lbox h2{font-size:1rem;font-weight:700;margin-bottom:1.25rem}
+.fg{display:grid;gap:.3rem;margin-bottom:.9rem}
+.fg label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m);font-weight:600}
+.err{color:var(--red);font-size:.8rem;margin-bottom:.75rem;display:none}
 
+/* ── APP ── */
 #app{display:none;min-height:100vh}
 header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .h-logo{font-size:1rem;font-weight:900;color:var(--a)}
-.h-user{font-size:.8rem;color:var(--m);display:flex;align-items:center;gap:1rem}
-.btn-logout{font-size:.78rem;color:var(--m);border:1px solid var(--bd);padding:.3rem .75rem;border-radius:5px;background:none;cursor:pointer;transition:color .2s,border-color .2s}
-.btn-logout:hover{color:var(--t);border-color:var(--m)}
+.h-right{display:flex;align-items:center;gap:1rem;font-size:.8rem;color:var(--m)}
+.btn-out{background:none;border:1px solid var(--bd);color:var(--m);padding:.3rem .75rem;border-radius:5px;cursor:pointer;transition:all .2s}
+.btn-out:hover{color:var(--t);border-color:var(--m)}
 
-.tabs{display:flex;border-bottom:1px solid var(--bd);background:var(--s1);padding:0 1.5rem}
-.tab{padding:.75rem 1.25rem;font-size:.82rem;font-weight:600;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s;text-transform:uppercase;letter-spacing:.08em}
+/* ── TABS ── */
+.tabs{display:flex;background:var(--s1);border-bottom:1px solid var(--bd);padding:0 1.5rem}
+.tab{padding:.75rem 1.25rem;font-size:.8rem;font-weight:700;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
 .tab:hover{color:var(--t)}
-.tab.active{color:var(--a);border-bottom-color:var(--a)}
+.tab.on{color:var(--a);border-bottom-color:var(--a)}
 
-.content{max-width:1000px;margin:0 auto;padding:2rem 1.5rem}
-.section{display:none}
-.section.active{display:block}
+/* ── CONTENT ── */
+.wrap{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
+.pane{display:none}
+.pane.on{display:block}
+.pane-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.pane-title{font-size:1.2rem;font-weight:800}
+.pane-count{font-size:.8rem;color:var(--m);margin-top:.2rem}
 
-.items-grid{display:grid;gap:.65rem;margin-top:1.5rem}
-.item-card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem}
-.item-card img{width:52px;height:52px;object-fit:cover;border-radius:6px;background:var(--s2);flex-shrink:0}
-.item-thumb-ph{width:52px;height:52px;border-radius:6px;background:var(--s2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--m)}
-.item-info{flex:1;min-width:0}
-.item-name{font-weight:700;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.item-sub{font-size:.78rem;color:var(--m);margin-top:.15rem}
-.item-actions{display:flex;gap:.5rem;flex-shrink:0}
-
-.btn{padding:.5rem 1.1rem;border-radius:6px;font-size:.82rem;font-weight:700;border:none;cursor:pointer;transition:all .2s}
-.btn-primary{background:var(--a);color:#000}
-.btn-primary:hover{background:#ffca5a}
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:6px;font-size:.82rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-p{background:var(--a);color:#000}.btn-p:hover{background:var(--a2)}
 .btn-sm{padding:.35rem .8rem;font-size:.75rem}
-.btn-edit{background:var(--s2);color:var(--t);border:1px solid var(--bd)}
-.btn-edit:hover{border-color:var(--a);color:var(--a)}
-.btn-del{background:var(--s2);color:var(--red);border:1px solid var(--bd)}
-.btn-del:hover{background:rgba(224,82,82,.1);border-color:var(--red)}
-.btn-outline{background:none;border:1px solid var(--bd);color:var(--t)}
-.btn-outline:hover{border-color:var(--a);color:var(--a)}
+.btn-e{background:var(--s2);color:var(--t);border:1px solid var(--bd)}.btn-e:hover{border-color:var(--a);color:var(--a)}
+.btn-d{background:var(--s2);color:var(--red);border:1px solid var(--bd)}.btn-d:hover{background:rgba(224,82,82,.1);border-color:var(--red)}
+.btn-o{background:none;border:1px solid var(--bd);color:var(--t)}.btn-o:hover{border-color:var(--a);color:var(--a)}
 
-.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}
-.sec-title{font-size:1.2rem;font-weight:800}
-.sec-count{font-size:.8rem;color:var(--m);margin-top:.2rem}
+/* ── LIST ── */
+.list{display:grid;gap:.6rem}
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;transition:border-color .2s}
+.card:hover{border-color:#333}
+.card-thumb{width:50px;height:50px;border-radius:6px;background:var(--s2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;overflow:hidden}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.card-info{flex:1;min-width:0}
+.card-name{font-weight:700;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-sub{font-size:.78rem;color:var(--m);margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-btns{display:flex;gap:.5rem;flex-shrink:0}
+.empty{text-align:center;padding:2.5rem;background:var(--s1);border-radius:var(--r);border:1px solid var(--bd);color:var(--m);font-size:.9rem}
+.loading{text-align:center;padding:2rem;color:var(--m);font-size:.88rem}
 
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:flex;align-items:center;justify-content:center;padding:1.5rem}
-.modal{background:var(--s1);border:1px solid var(--bd);border-radius:12px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto}
-.modal-head{padding:1.25rem 1.5rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--s1);z-index:1}
-.modal-head h3{font-size:1rem;font-weight:800}
-.modal-close{background:none;border:none;color:var(--m);font-size:1.4rem;cursor:pointer;line-height:1;padding:.25rem}
-.modal-close:hover{color:var(--t)}
-.modal-body{padding:1.5rem}
-.modal-footer{padding:1rem 1.5rem;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:.65rem}
-
-.fg{display:grid;gap:.3rem;margin-bottom:1rem}
-.fg label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m);font-weight:600}
-.fg input,.fg select,.fg textarea{background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:.65rem .875rem;color:var(--t);font-size:.9rem;width:100%;transition:border-color .2s}
-.fg input:focus,.fg textarea:focus,.fg select:focus{outline:none;border-color:var(--a)}
-.fg textarea{min-height:90px;resize:vertical}
-.fg select{cursor:pointer;-webkit-appearance:none}
+/* ── MODAL ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:500;display:flex;align-items:center;justify-content:center;padding:1.25rem}
+.modal{background:var(--s1);border:1px solid var(--bd);border-radius:12px;width:100%;max-width:520px;max-height:92vh;display:flex;flex-direction:column}
+.mhead{padding:1.25rem 1.5rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.mhead h3{font-size:1rem;font-weight:800}
+.mclose{background:none;border:none;color:var(--m);font-size:1.5rem;cursor:pointer;line-height:1;padding:.2rem .4rem;border-radius:4px}
+.mclose:hover{color:var(--t);background:var(--s2)}
+.mbody{padding:1.5rem;overflow-y:auto;flex:1}
+.mfoot{padding:1rem 1.5rem;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:.65rem;flex-shrink:0}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.fg-hint{font-size:.72rem;color:var(--m);margin-top:.3rem}
-.check-row{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
-.check-row input{width:16px;height:16px;accent-color:var(--a);cursor:pointer}
-.check-row label{font-size:.88rem;cursor:pointer}
+.fg-hint{font-size:.72rem;color:var(--m);margin-top:.25rem}
+.chk{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
+.chk input[type=checkbox]{width:17px;height:17px;accent-color:var(--a);cursor:pointer;flex-shrink:0}
+.chk label{font-size:.9rem;cursor:pointer}
 
-.img-upload{border:2px dashed var(--bd);border-radius:var(--r);padding:1.5rem;text-align:center;cursor:pointer;transition:border-color .2s}
-.img-upload:hover{border-color:var(--a)}
-.img-upload input{display:none}
-.img-upload-icon{font-size:2rem;color:var(--m);margin-bottom:.5rem}
-.img-upload-txt{font-size:.82rem;color:var(--m)}
-.img-upload-txt strong{color:var(--a)}
-.img-preview{width:100%;max-height:160px;object-fit:cover;border-radius:6px;margin-top:.75rem}
-.upload-progress{height:3px;background:var(--bd);border-radius:2px;margin-top:.5rem;display:none}
-.upload-bar{height:100%;background:var(--a);border-radius:2px;width:0;transition:width .3s}
+/* ── IMAGE UPLOAD ── */
+.uploader{border:2px dashed var(--bd);border-radius:var(--r);padding:1.5rem;text-align:center;cursor:pointer;transition:border-color .2s}
+.uploader:hover{border-color:var(--a)}
+.up-icon{font-size:1.75rem;color:var(--m);margin-bottom:.4rem}
+.up-txt{font-size:.82rem;color:var(--m)}.up-txt strong{color:var(--a)}
+.up-preview{width:100%;max-height:150px;object-fit:cover;border-radius:6px;margin-top:.75rem;display:none}
+.up-bar-wrap{height:3px;background:var(--bd);border-radius:2px;margin-top:.6rem;display:none}
+.up-bar{height:100%;background:var(--a);border-radius:2px;width:0;transition:width .35s}
+.up-status{font-size:.73rem;color:var(--m);margin-top:.35rem}
 
-.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:.875rem 1.25rem;font-size:.85rem;z-index:1000;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;max-width:320px}
+/* ── TOAST ── */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:.875rem 1.25rem;font-size:.84rem;z-index:2000;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;max-width:300px}
 .toast.show{opacity:1;transform:none}
-.toast.ok{border-left:3px solid var(--green);color:var(--green)}
+.toast.ok{border-left:3px solid var(--grn);color:var(--grn)}
 .toast.err{border-left:3px solid var(--red);color:var(--red)}
-.loading{color:var(--m);font-size:.88rem;padding:2rem 0;text-align:center}
-.empty{color:var(--m);font-size:.88rem;padding:2rem;text-align:center;background:var(--s1);border-radius:var(--r);border:1px solid var(--bd)}
 </style>
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="login-screen">
-  <div class="login-box">
-    <div class="login-logo">Schwansinn</div>
-    <div class="login-sub">Admin-Panel</div>
-    <h2 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem">Anmelden</h2>
-    <div class="lg-fg"><label>E-Mail</label><input type="email" id="lg-email" placeholder="deine@email.de"></div>
-    <div class="lg-fg"><label>Passwort</label><input type="password" id="lg-pw" placeholder="••••••••"></div>
-    <div class="err-msg" id="lg-err">E-Mail oder Passwort falsch.</div>
-    <button class="btn btn-primary" style="width:100%;padding:.75rem;font-size:.92rem" id="lg-btn" onclick="login()">Anmelden</button>
+  <div class="lbox">
+    <div class="lbox-brand">Schwansinn</div>
+    <div class="lbox-sub">Admin-Panel</div>
+    <h2>Anmelden</h2>
+    <div class="fg"><label>E-Mail</label><input type="email" id="l-email" placeholder="deine@email.de" autocomplete="email"></div>
+    <div class="fg"><label>Passwort</label><input type="password" id="l-pw" placeholder="••••••••" autocomplete="current-password"></div>
+    <p class="err" id="l-err">E-Mail oder Passwort falsch.</p>
+    <button class="btn btn-p" id="l-btn" style="width:100%;padding:.75rem;font-size:.92rem;justify-content:center" onclick="doLogin()">Anmelden</button>
   </div>
 </div>
 
+<!-- APP -->
 <div id="app">
   <header>
     <div class="h-logo">Schwansinn Admin</div>
-    <div class="h-user">
-      <span id="user-email"></span>
-      <button class="btn-logout" onclick="logout()">Abmelden</button>
+    <div class="h-right">
+      <span id="u-email"></span>
+      <button class="btn-out" onclick="doLogout()">Abmelden</button>
     </div>
   </header>
+
   <div class="tabs">
-    <div class="tab active" onclick="switchTab('termine')">🗓 Termine</div>
-    <div class="tab" onclick="switchTab('galerie')">🖼 Galerie</div>
-    <div class="tab" onclick="switchTab('musiker')">🎺 Musiker</div>
+    <div class="tab on" onclick="goTab('termine')">🗓 Termine</div>
+    <div class="tab" onclick="goTab('galerie')">🖼 Galerie</div>
+    <div class="tab" onclick="goTab('musiker')">🎺 Musiker</div>
   </div>
-  <div class="content">
-    <div class="section active" id="sec-termine">
-      <div class="sec-head">
-        <div><div class="sec-title">Termine</div><div class="sec-count" id="cnt-termine"></div></div>
-        <button class="btn btn-primary" onclick="openModal('termin')">+ Neuer Termin</button>
+
+  <div class="wrap">
+    <!-- TERMINE -->
+    <div class="pane on" id="pane-termine">
+      <div class="pane-head">
+        <div><div class="pane-title">Termine</div><div class="pane-count" id="c-termine"></div></div>
+        <button class="btn btn-p" onclick="openModal('termin')">+ Neuer Termin</button>
       </div>
-      <div class="items-grid" id="list-termine"><div class="loading">Lade Termine…</div></div>
+      <div class="list" id="list-termine"><div class="loading">Lade…</div></div>
     </div>
-    <div class="section" id="sec-galerie">
-      <div class="sec-head">
-        <div><div class="sec-title">Galerie</div><div class="sec-count" id="cnt-galerie"></div></div>
-        <button class="btn btn-primary" onclick="openModal('galerie')">+ Neues Foto</button>
+    <!-- GALERIE -->
+    <div class="pane" id="pane-galerie">
+      <div class="pane-head">
+        <div><div class="pane-title">Galerie</div><div class="pane-count" id="c-galerie"></div></div>
+        <button class="btn btn-p" onclick="openModal('galerie')">+ Neues Foto</button>
       </div>
-      <div class="items-grid" id="list-galerie"><div class="loading">Lade Galerie…</div></div>
+      <div class="list" id="list-galerie"><div class="loading">Lade…</div></div>
     </div>
-    <div class="section" id="sec-musiker">
-      <div class="sec-head">
-        <div><div class="sec-title">Musiker</div><div class="sec-count" id="cnt-musiker"></div></div>
-        <button class="btn btn-primary" onclick="openModal('musiker')">+ Neuer Musiker</button>
+    <!-- MUSIKER -->
+    <div class="pane" id="pane-musiker">
+      <div class="pane-head">
+        <div><div class="pane-title">Musiker</div><div class="pane-count" id="c-musiker"></div></div>
+        <button class="btn btn-p" onclick="openModal('musiker')">+ Neuer Musiker</button>
       </div>
-      <div class="items-grid" id="list-musiker"><div class="loading">Lade Musiker…</div></div>
+      <div class="list" id="list-musiker"><div class="loading">Lade…</div></div>
     </div>
   </div>
 </div>
 
+<!-- MODAL -->
 <div class="modal-bg" id="modal-bg" style="display:none">
   <div class="modal">
-    <div class="modal-head">
-      <h3 id="modal-title">Eintrag</h3>
-      <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="mhead">
+      <h3 id="m-title">Eintrag</h3>
+      <button class="mclose" onclick="closeModal()">×</button>
     </div>
-    <div class="modal-body" id="modal-body"></div>
-    <div class="modal-footer">
-      <button class="btn btn-outline" onclick="closeModal()">Abbrechen</button>
-      <button class="btn btn-primary" id="modal-save" onclick="saveEntry()">Speichern</button>
+    <div class="mbody" id="m-body"></div>
+    <div class="mfoot">
+      <button class="btn btn-o" onclick="closeModal()">Abbrechen</button>
+      <button class="btn btn-p" id="m-save" onclick="doSave()">Speichern</button>
     </div>
   </div>
 </div>
@@ -169,292 +181,280 @@ header{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.
 <div class="toast" id="toast"></div>
 
 <script>
-const SB_URL = 'https://hqkpckckzegxqghdchrd.supabase.co';
-const SB_KEY = 'sb_publishable_VgY442Ty_q-Utae-8MMI8A_QPeqUz5U';
+// ── CONFIG ──
+var SB = 'https://hqkpckckzegxqghdchrd.supabase.co';
+var KEY = 'sb_publishable_VgY442Ty_q-Utae-8MMI8A_QPeqUz5U';
 
-let token = null;
-let currentType = null;
-let editingId = null;
-let uploadedImageUrl = null;
+// ── STATE ──
+var token = null;
+var mType = null;
+var mId = null;
+var imgUrl = null;
 
 // ── HELPERS ──
-function val(id) {
-  const el = document.getElementById(id);
-  return el ? el.value.trim() : '';
-}
-function chk(id) {
-  const el = document.getElementById(id);
-  return el ? el.checked : false;
-}
-function num(id) {
-  return parseInt(document.getElementById(id)?.value) || 0;
-}
+function g(id) { return document.getElementById(id); }
+function val(id) { var e = g(id); return e ? e.value.trim() : ''; }
+function chkd(id) { var e = g(id); return e ? e.checked : false; }
+function toInt(id) { return parseInt(val(id)) || 0; }
+
 function parseDate(raw) {
   if (!raw) return '';
+  // Already ISO
   if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  // DD/MM/YYYY
   if (/^\d{2}\/\d{2}\/\d{4}$/.test(raw)) {
-    const p = raw.split('/');
+    var p = raw.split('/');
     return p[2] + '-' + p[1] + '-' + p[0];
   }
+  // DD.MM.YYYY
   if (/^\d{2}\.\d{2}\.\d{4}$/.test(raw)) {
-    const p = raw.split('.');
+    var p = raw.split('.');
     return p[2] + '-' + p[1] + '-' + p[0];
   }
-  const d = new Date(raw);
-  if (!isNaN(d)) return d.toISOString().split('T')[0];
+  // Try native date input valueAsDate approach via Date parse
+  var d = new Date(raw);
+  if (!isNaN(d.getTime())) {
+    var m = d.getMonth() + 1;
+    var day = d.getDate();
+    return d.getFullYear() + '-' + (m < 10 ? '0' + m : m) + '-' + (day < 10 ? '0' + day : day);
+  }
   return raw;
 }
-function formatDate(d) {
-  if (!d) return '';
-  const dt = new Date(d + 'T12:00:00');
-  return dt.toLocaleDateString('de-DE', {day:'2-digit', month:'long', year:'numeric'});
+
+function fmtDate(iso) {
+  if (!iso) return '';
+  var d = new Date(iso + 'T12:00:00');
+  return d.toLocaleDateString('de-DE', {day:'2-digit', month:'long', year:'numeric'});
 }
+
 function toast(msg, type) {
-  const el = document.getElementById('toast');
+  var el = g('toast');
   el.textContent = msg;
-  el.className = 'toast ' + (type||'ok') + ' show';
-  setTimeout(() => el.classList.remove('show'), 3500);
+  el.className = 'toast ' + (type || 'ok') + ' show';
+  clearTimeout(el._t);
+  el._t = setTimeout(function() { el.classList.remove('show'); }, 3500);
 }
 
-// ── SUPABASE ──
-async function sbFetch(path, opts) {
-  opts = opts || {};
-  const headers = {
-    'apikey': SB_KEY,
-    'Content-Type': 'application/json'
-  };
+// ── SUPABASE FETCH ──
+async function sb(path, method, body, extra) {
+  var headers = { 'apikey': KEY, 'Content-Type': 'application/json' };
   if (token) headers['Authorization'] = 'Bearer ' + token;
-  if (opts.headers) Object.assign(headers, opts.headers);
-  const res = await fetch(SB_URL + path, {
-    method: opts.method || 'GET',
-    headers: headers,
-    body: opts.body || undefined
-  });
+  if (extra) { for (var k in extra) headers[k] = extra[k]; }
+  var opts = { method: method || 'GET', headers: headers };
+  if (body !== undefined && body !== null) opts.body = JSON.stringify(body);
+  var res = await fetch(SB + path, opts);
   if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || err.error_description || res.statusText);
+    var msg = res.statusText;
+    try { var e = await res.json(); msg = e.message || e.error_description || msg; } catch(x) {}
+    throw new Error(msg);
   }
-  const text = await res.text();
+  var text = await res.text();
   if (!text || !text.trim()) return null;
-  try { return JSON.parse(text); } catch(e) { return null; }
+  try { return JSON.parse(text); } catch(x) { return null; }
 }
 
-async function uploadImage(file) {
-  const ext = file.name.split('.').pop();
-  const name = Date.now() + '.' + ext;
-  const res = await fetch(SB_URL + '/storage/v1/object/bilder/' + name, {
+async function uploadImg(file) {
+  var name = Date.now() + '.' + file.name.split('.').pop();
+  var res = await fetch(SB + '/storage/v1/object/bilder/' + name, {
     method: 'POST',
-    headers: {
-      'apikey': SB_KEY,
-      'Authorization': 'Bearer ' + token,
-      'Content-Type': file.type
-    },
+    headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + token, 'Content-Type': file.type },
     body: file
   });
-  if (!res.ok) throw new Error('Bild-Upload fehlgeschlagen');
-  return SB_URL + '/storage/v1/object/public/bilder/' + name;
+  if (!res.ok) throw new Error('Upload fehlgeschlagen');
+  return SB + '/storage/v1/object/public/bilder/' + name;
 }
 
 // ── AUTH ──
-async function login() {
-  const email = document.getElementById('lg-email').value.trim();
-  const pw = document.getElementById('lg-pw').value;
-  const errEl = document.getElementById('lg-err');
-  const btn = document.getElementById('lg-btn');
+async function doLogin() {
+  var email = val('l-email');
+  var pw = g('l-pw').value;
+  var errEl = g('l-err');
+  var btn = g('l-btn');
   errEl.style.display = 'none';
   btn.textContent = 'Anmelden…';
   btn.disabled = true;
   try {
-    const res = await fetch(SB_URL + '/auth/v1/token?grant_type=password', {
+    var res = await fetch(SB + '/auth/v1/token?grant_type=password', {
       method: 'POST',
-      headers: {'apikey': SB_KEY, 'Content-Type': 'application/json'},
-      body: JSON.stringify({email: email, password: pw})
+      headers: { 'apikey': KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, password: pw })
     });
-    const data = await res.json();
+    var data = await res.json();
     if (!res.ok) throw new Error(data.error_description || data.msg || 'Fehler');
     token = data.access_token;
-    document.getElementById('user-email').textContent = email;
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
+    g('u-email').textContent = email;
+    g('login-screen').style.display = 'none';
+    g('app').style.display = 'block';
     loadAll();
   } catch(e) {
     errEl.style.display = 'block';
-    errEl.textContent = e.message || 'E-Mail oder Passwort falsch.';
-  } finally {
-    btn.textContent = 'Anmelden';
-    btn.disabled = false;
+    errEl.textContent = e.message || 'Anmeldung fehlgeschlagen.';
   }
+  btn.textContent = 'Anmelden';
+  btn.disabled = false;
 }
+g('l-pw').addEventListener('keydown', function(e) { if (e.key === 'Enter') doLogin(); });
 
-function logout() {
+function doLogout() {
   token = null;
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('app').style.display = 'none';
+  g('login-screen').style.display = 'flex';
+  g('app').style.display = 'none';
 }
-
-document.getElementById('lg-pw').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') login();
-});
 
 // ── TABS ──
-function switchTab(name) {
-  var tabs = ['termine','galerie','musiker'];
-  document.querySelectorAll('.tab').forEach(function(t, i) {
-    t.classList.toggle('active', tabs[i] === name);
+function goTab(name) {
+  var names = ['termine','galerie','musiker'];
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function(t, i) { t.classList.toggle('on', names[i] === name); });
+  names.forEach(function(n) {
+    g('pane-' + n).classList.toggle('on', n === name);
   });
-  document.querySelectorAll('.section').forEach(function(s) {
-    s.classList.remove('active');
-  });
-  document.getElementById('sec-' + name).classList.add('active');
 }
 
 // ── LOAD ──
-function loadAll() {
-  loadTermine();
-  loadGalerie();
-  loadMusiker();
-}
+function loadAll() { loadTermine(); loadGalerie(); loadMusiker(); }
 
 async function loadTermine() {
-  const el = document.getElementById('list-termine');
+  var el = g('list-termine');
+  el.innerHTML = '<div class="loading">Lade…</div>';
   try {
-    const data = await sbFetch('/rest/v1/termine?select=*&order=datum.desc');
-    document.getElementById('cnt-termine').textContent = data.length + ' Einträge';
-    if (!data.length) { el.innerHTML = '<div class="empty">Noch keine Termine eingetragen.</div>'; return; }
-    el.innerHTML = data.map(function(t) {
-      return '<div class="item-card">' +
-        '<div class="item-thumb-ph">🗓</div>' +
-        '<div class="item-info">' +
-          '<div class="item-name">' + t.titel + '</div>' +
-          '<div class="item-sub">' + formatDate(t.datum) + ' · ' + (t.uhrzeit_von||'') + (t.uhrzeit_bis?' – '+t.uhrzeit_bis:'') + (t.ort?' · '+t.ort:'') + '</div>' +
+    var rows = await sb('/rest/v1/termine?select=*&order=datum.asc', 'GET');
+    g('c-termine').textContent = rows.length + ' Einträge';
+    if (!rows.length) { el.innerHTML = '<div class="empty">Noch keine Termine eingetragen.</div>'; return; }
+    el.innerHTML = rows.map(function(r) {
+      return '<div class="card">' +
+        '<div class="card-thumb">🗓</div>' +
+        '<div class="card-info">' +
+          '<div class="card-name">' + esc(r.titel) + '</div>' +
+          '<div class="card-sub">' + fmtDate(r.datum) + (r.uhrzeit_von ? ' · ' + r.uhrzeit_von : '') + (r.uhrzeit_bis ? ' – ' + r.uhrzeit_bis : '') + (r.ort ? ' · ' + esc(r.ort) : '') + '</div>' +
         '</div>' +
-        '<div class="item-actions">' +
-          '<button class="btn btn-sm btn-edit" onclick="editEntry(\'termin\',\'' + t.id + '\')">Bearbeiten</button>' +
-          '<button class="btn btn-sm btn-del" onclick="deleteEntry(\'termine\',\'' + t.id + '\',loadTermine)">Löschen</button>' +
+        '<div class="card-btns">' +
+          '<button class="btn btn-sm btn-e" onclick="editEntry(\'termin\',\'' + r.id + '\')">Bearbeiten</button>' +
+          '<button class="btn btn-sm btn-d" onclick="delEntry(\'termine\',\'' + r.id + '\',loadTermine)">Löschen</button>' +
         '</div></div>';
     }).join('');
   } catch(e) { el.innerHTML = '<div class="empty">Fehler: ' + e.message + '</div>'; }
 }
 
 async function loadGalerie() {
-  const el = document.getElementById('list-galerie');
+  var el = g('list-galerie');
+  el.innerHTML = '<div class="loading">Lade…</div>';
   try {
-    const data = await sbFetch('/rest/v1/galerie?select=*&order=reihenfolge.asc');
-    document.getElementById('cnt-galerie').textContent = data.length + ' Einträge';
-    if (!data.length) { el.innerHTML = '<div class="empty">Noch keine Fotos eingetragen.</div>'; return; }
-    el.innerHTML = data.map(function(g) {
-      return '<div class="item-card">' +
-        (g.bild_url ? '<img src="' + g.bild_url + '" alt="' + g.titel + '">' : '<div class="item-thumb-ph">🖼</div>') +
-        '<div class="item-info">' +
-          '<div class="item-name">' + g.titel + '</div>' +
-          '<div class="item-sub">' + (g.jahr||'') + (g.breit?' · Panorama':'') + '</div>' +
+    var rows = await sb('/rest/v1/galerie?select=*&order=reihenfolge.asc', 'GET');
+    g('c-galerie').textContent = rows.length + ' Einträge';
+    if (!rows.length) { el.innerHTML = '<div class="empty">Noch keine Fotos eingetragen.</div>'; return; }
+    el.innerHTML = rows.map(function(r) {
+      return '<div class="card">' +
+        '<div class="card-thumb">' + (r.bild_url ? '<img src="' + r.bild_url + '" alt="">' : '🖼') + '</div>' +
+        '<div class="card-info">' +
+          '<div class="card-name">' + esc(r.titel) + '</div>' +
+          '<div class="card-sub">' + (r.jahr || '') + (r.breit ? ' · Panorama' : '') + '</div>' +
         '</div>' +
-        '<div class="item-actions">' +
-          '<button class="btn btn-sm btn-edit" onclick="editEntry(\'galerie\',\'' + g.id + '\')">Bearbeiten</button>' +
-          '<button class="btn btn-sm btn-del" onclick="deleteEntry(\'galerie\',\'' + g.id + '\',loadGalerie)">Löschen</button>' +
+        '<div class="card-btns">' +
+          '<button class="btn btn-sm btn-e" onclick="editEntry(\'galerie\',\'' + r.id + '\')">Bearbeiten</button>' +
+          '<button class="btn btn-sm btn-d" onclick="delEntry(\'galerie\',\'' + r.id + '\',loadGalerie)">Löschen</button>' +
         '</div></div>';
     }).join('');
   } catch(e) { el.innerHTML = '<div class="empty">Fehler: ' + e.message + '</div>'; }
 }
 
 async function loadMusiker() {
-  const el = document.getElementById('list-musiker');
+  var el = g('list-musiker');
+  el.innerHTML = '<div class="loading">Lade…</div>';
   try {
-    const data = await sbFetch('/rest/v1/musiker?select=*&order=reihenfolge.asc');
-    document.getElementById('cnt-musiker').textContent = data.length + ' Einträge';
-    if (!data.length) { el.innerHTML = '<div class="empty">Noch keine Musiker eingetragen.</div>'; return; }
-    el.innerHTML = data.map(function(m) {
-      var ini = m.name.split(' ').map(function(w){return w[0];}).join('').slice(0,2);
-      return '<div class="item-card">' +
-        (m.bild_url ? '<img src="' + m.bild_url + '" alt="' + m.name + '">' : '<div class="item-thumb-ph">' + ini + '</div>') +
-        '<div class="item-info">' +
-          '<div class="item-name">' + m.name + '</div>' +
-          '<div class="item-sub">' + (m.instrument||'') + (m.register?' · '+m.register:'') + '</div>' +
+    var rows = await sb('/rest/v1/musiker?select=*&order=reihenfolge.asc', 'GET');
+    g('c-musiker').textContent = rows.length + ' Einträge';
+    if (!rows.length) { el.innerHTML = '<div class="empty">Noch keine Musiker eingetragen.</div>'; return; }
+    el.innerHTML = rows.map(function(r) {
+      var ini = r.name.split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2).toUpperCase();
+      return '<div class="card">' +
+        '<div class="card-thumb">' + (r.bild_url ? '<img src="' + r.bild_url + '" alt="">' : ini) + '</div>' +
+        '<div class="card-info">' +
+          '<div class="card-name">' + esc(r.name) + '</div>' +
+          '<div class="card-sub">' + (r.instrument || '') + (r.register ? ' · ' + r.register : '') + '</div>' +
         '</div>' +
-        '<div class="item-actions">' +
-          '<button class="btn btn-sm btn-edit" onclick="editEntry(\'musiker\',\'' + m.id + '\')">Bearbeiten</button>' +
-          '<button class="btn btn-sm btn-del" onclick="deleteEntry(\'musiker\',\'' + m.id + '\',loadMusiker)">Löschen</button>' +
+        '<div class="card-btns">' +
+          '<button class="btn btn-sm btn-e" onclick="editEntry(\'musiker\',\'' + r.id + '\')">Bearbeiten</button>' +
+          '<button class="btn btn-sm btn-d" onclick="delEntry(\'musiker\',\'' + r.id + '\',loadMusiker)">Löschen</button>' +
         '</div></div>';
     }).join('');
   } catch(e) { el.innerHTML = '<div class="empty">Fehler: ' + e.message + '</div>'; }
 }
 
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
 // ── MODAL ──
 function openModal(type, data) {
   data = data || {};
-  currentType = type;
-  editingId = data.id || null;
-  uploadedImageUrl = data.bild_url || null;
-  var titles = {termin: editingId?'Termin bearbeiten':'Neuer Termin', galerie: editingId?'Foto bearbeiten':'Neues Foto', musiker: editingId?'Musiker bearbeiten':'Neuer Musiker'};
-  document.getElementById('modal-title').textContent = titles[type];
-  document.getElementById('modal-body').innerHTML = buildForm(type, data);
-  document.getElementById('modal-bg').style.display = 'flex';
-  setupImageUpload();
+  mType = type;
+  mId = data.id || null;
+  imgUrl = data.bild_url || null;
+  var titles = { termin: mId?'Termin bearbeiten':'Neuer Termin', galerie: mId?'Foto bearbeiten':'Neues Foto', musiker: mId?'Musiker bearbeiten':'Neuer Musiker' };
+  g('m-title').textContent = titles[type];
+  g('m-body').innerHTML = buildForm(type, data);
+  g('modal-bg').style.display = 'flex';
+  setupUpload();
 }
 
 function closeModal() {
-  document.getElementById('modal-bg').style.display = 'none';
-  currentType = null; editingId = null; uploadedImageUrl = null;
+  g('modal-bg').style.display = 'none';
+  mType = null; mId = null; imgUrl = null;
 }
 
-document.getElementById('modal-bg').addEventListener('click', function(e) {
-  if (e.target === document.getElementById('modal-bg')) closeModal();
+g('modal-bg').addEventListener('click', function(e) {
+  if (e.target === g('modal-bg')) closeModal();
 });
 
-function buildForm(type, d) {
-  d = d || {};
-  if (type === 'termin') {
-    return '<div class="fg"><label>Titel *</label><input id="f-titel" value="' + (d.titel||'') + '" placeholder="Sommerfest Musterverein"></div>' +
-      '<div class="frow"><div class="fg"><label>Datum *</label><input id="f-datum" type="date" value="' + (d.datum||'') + '"></div>' +
-      '<div class="fg"><label>Uhrzeit von</label><input id="f-von" value="' + (d.uhrzeit_von||'') + '" placeholder="19:00"></div></div>' +
-      '<div class="fg"><label>Uhrzeit bis</label><input id="f-bis" value="' + (d.uhrzeit_bis||'') + '" placeholder="22:00"></div>' +
-      '<div class="fg"><label>Ort / Veranstaltungsname</label><input id="f-ort" value="' + (d.ort||'') + '" placeholder="Festplatz Musterhausen"></div>' +
-      '<div class="fg"><label>Adresse</label><input id="f-adresse" value="' + (d.adresse||'') + '" placeholder="Musterstraße 1, 12345 Musterstadt"></div>' +
-      '<div class="fg"><label>Google Maps Link</label><input id="f-maps" value="' + (d.maps_link||'') + '" placeholder="https://maps.google.com/..."></div>' +
-      '<div class="check-row"><input type="checkbox" id="f-frei"' + (d.eintritt_frei?' checked':'') + '><label for="f-frei">Freier Eintritt</label></div>';
+function buildForm(t, d) {
+  if (t === 'termin') {
+    return fg('Titel *', '<input id="f-titel" value="' + esc(d.titel||'') + '" placeholder="z.B. Sommerfest Musterverein">') +
+      '<div class="frow">' + fg('Datum *', '<input id="f-datum" type="date" value="' + (d.datum||'') + '">') + fg('Uhrzeit von', '<input id="f-von" value="' + esc(d.uhrzeit_von||'') + '" placeholder="19:00">') + '</div>' +
+      fg('Uhrzeit bis', '<input id="f-bis" value="' + esc(d.uhrzeit_bis||'') + '" placeholder="22:00">') +
+      fg('Ort / Veranstaltung', '<input id="f-ort" value="' + esc(d.ort||'') + '" placeholder="Festplatz Musterstadt">') +
+      fg('Adresse', '<input id="f-adresse" value="' + esc(d.adresse||'') + '" placeholder="Musterstr. 1, 12345 Musterstadt">') +
+      fg('Google Maps Link', '<input id="f-maps" value="' + esc(d.maps_link||'') + '" placeholder="https://maps.google.com/...">') +
+      '<div class="chk"><input type="checkbox" id="f-frei"' + (d.eintritt_frei?' checked':'') + '><label for="f-frei">Freier Eintritt</label></div>';
   }
-  if (type === 'galerie') {
-    return '<div class="fg"><label>Titel *</label><input id="f-titel" value="' + (d.titel||'') + '" placeholder="Sommerfest Stadtmusik Schwenningen"></div>' +
-      '<div class="fg"><label>Jahr</label><input id="f-jahr" type="number" value="' + (d.jahr||'') + '" placeholder="2024"></div>' +
-      '<div class="fg"><label>Reihenfolge</label><input id="f-sort" type="number" value="' + (d.reihenfolge||0) + '"></div>' +
-      '<div class="check-row"><input type="checkbox" id="f-breit"' + (d.breit?' checked':'') + '><label for="f-breit">Panorama-Format (doppelt breit)</label></div>' +
-      imgUploadHTML(d.bild_url);
+  if (t === 'galerie') {
+    return fg('Titel *', '<input id="f-titel" value="' + esc(d.titel||'') + '" placeholder="z.B. Sommerfest 2024">') +
+      '<div class="frow">' + fg('Jahr', '<input id="f-jahr" type="number" value="' + (d.jahr||'') + '" placeholder="2024">') + fg('Reihenfolge', '<input id="f-sort" type="number" value="' + (d.reihenfolge||0) + '">') + '</div>' +
+      '<div class="chk"><input type="checkbox" id="f-breit"' + (d.breit?' checked':'') + '><label for="f-breit">Panorama-Format (doppelt breit)</label></div>' +
+      uploadField(d.bild_url);
   }
-  if (type === 'musiker') {
-    var registers = ['Trompete & Flügelhorn','Holzregister','Mittleres Blech & Horn','Maschinenraum & Gesang'];
-    var opts = registers.map(function(r){ return '<option' + (d.register===r?' selected':'') + '>' + r + '</option>'; }).join('');
-    return '<div class="frow"><div class="fg"><label>Name *</label><input id="f-name" value="' + (d.name||'') + '" placeholder="Max Mustermann"></div>' +
-      '<div class="fg"><label>Reihenfolge</label><input id="f-sort" type="number" value="' + (d.reihenfolge||0) + '"></div></div>' +
-      '<div class="frow"><div class="fg"><label>Instrument</label><input id="f-instrument" value="' + (d.instrument||'') + '" placeholder="Trompete"></div>' +
-      '<div class="fg"><label>Register</label><select id="f-register"><option value="">Bitte wählen</option>' + opts + '</select></div></div>' +
-      '<div class="fg"><label>Beschreibung</label><textarea id="f-beschreibung">' + (d.beschreibung||'') + '</textarea></div>' +
-      imgUploadHTML(d.bild_url);
+  if (t === 'musiker') {
+    var regs = ['Trompete & Flügelhorn','Holzregister','Mittleres Blech & Horn','Maschinenraum & Gesang'];
+    var ropts = '<option value="">Bitte wählen</option>' + regs.map(function(r){ return '<option' + (d.register===r?' selected':'') + '>' + r + '</option>'; }).join('');
+    return '<div class="frow">' + fg('Name *', '<input id="f-name" value="' + esc(d.name||'') + '" placeholder="Max Mustermann">') + fg('Reihenfolge', '<input id="f-sort" type="number" value="' + (d.reihenfolge||0) + '">') + '</div>' +
+      '<div class="frow">' + fg('Instrument', '<input id="f-instr" value="' + esc(d.instrument||'') + '" placeholder="Trompete">') + fg('Register', '<select id="f-reg">' + ropts + '</select>') + '</div>' +
+      fg('Beschreibung', '<textarea id="f-desc">' + esc(d.beschreibung||'') + '</textarea>') +
+      uploadField(d.bild_url);
   }
   return '';
 }
 
-function imgUploadHTML(url) {
-  return '<div class="fg"><label>Foto hochladen</label>' +
-    '<div class="img-upload" onclick="document.getElementById(\'img-input\').click()">' +
-    '<input type="file" id="img-input" accept="image/*">' +
-    '<div class="img-upload-icon">📷</div>' +
-    '<div class="img-upload-txt">Klicken zum Auswählen<br><strong>JPG, PNG, WEBP</strong> · max. 50 MB</div>' +
-    (url ? '<img class="img-preview" id="img-preview" src="' + url + '">' : '<img class="img-preview" id="img-preview" style="display:none">') +
-    '</div>' +
-    '<div class="upload-progress" id="upload-progress"><div class="upload-bar" id="upload-bar"></div></div>' +
-    '<div class="fg-hint" id="upload-status">' + (url?'✓ Bild vorhanden':'Noch kein Bild hochgeladen') + '</div></div>';
+function fg(label, input) {
+  return '<div class="fg"><label>' + label + '</label>' + input + '</div>';
 }
 
-function setupImageUpload() {
-  var inp = document.getElementById('img-input');
+function uploadField(url) {
+  return '<div class="fg"><label>Foto hochladen</label>' +
+    '<div class="uploader" onclick="g(\'f-file\').click()">' +
+    '<input type="file" id="f-file" accept="image/*" style="display:none">' +
+    '<div class="up-icon">📷</div>' +
+    '<div class="up-txt">Klicken zum Auswählen · <strong>JPG, PNG, WEBP</strong></div>' +
+    '<img class="up-preview" id="f-preview"' + (url?' src="'+url+'" style="display:block"':'') + ' alt="">' +
+    '</div>' +
+    '<div class="up-bar-wrap" id="f-prog"><div class="up-bar" id="f-bar"></div></div>' +
+    '<div class="up-status" id="f-status">' + (url ? '✓ Bild vorhanden' : 'Noch kein Bild') + '</div></div>';
+}
+
+function setupUpload() {
+  var inp = g('f-file');
   if (!inp) return;
   inp.addEventListener('change', async function(e) {
     var file = e.target.files[0];
     if (!file) return;
-    var preview = document.getElementById('img-preview');
-    var status = document.getElementById('upload-status');
-    var prog = document.getElementById('upload-progress');
-    var bar = document.getElementById('upload-bar');
+    var preview = g('f-preview'), status = g('f-status'), prog = g('f-prog'), bar = g('f-bar');
     preview.src = URL.createObjectURL(file);
     preview.style.display = 'block';
     prog.style.display = 'block';
@@ -462,111 +462,100 @@ function setupImageUpload() {
     status.textContent = 'Wird hochgeladen…';
     try {
       bar.style.width = '70%';
-      uploadedImageUrl = await uploadImage(file);
+      imgUrl = await uploadImg(file);
       bar.style.width = '100%';
-      status.textContent = '✓ Erfolgreich hochgeladen';
-      setTimeout(function(){ prog.style.display='none'; }, 800);
+      status.textContent = '✓ Hochgeladen';
+      setTimeout(function(){ prog.style.display='none'; }, 700);
     } catch(err) {
-      status.textContent = '✗ Upload fehlgeschlagen: ' + err.message;
+      status.textContent = '✗ Fehler: ' + err.message;
       prog.style.display = 'none';
     }
   });
 }
 
 // ── SAVE ──
-async function saveEntry() {
-  var btn = document.getElementById('modal-save');
+async function doSave() {
+  // Snapshot state BEFORE closeModal clears it
+  var type = mType;
+  var id = mId;
+  var btn = g('m-save');
   btn.disabled = true;
   btn.textContent = 'Speichern…';
+
   try {
-    var body = {};
+    var body = null;
     var table = '';
 
-    if (currentType === 'termin') {
+    if (type === 'termin') {
       table = 'termine';
       var titel = val('f-titel');
-      var datumRaw = val('f-datum');
-      var datumISO = parseDate(datumRaw);
       if (!titel) { toast('Bitte Titel ausfüllen.', 'err'); return; }
+      // Get date from input - use valueAsDate for max reliability
+      var dateEl = g('f-datum');
+      var datumISO = '';
+      if (dateEl.valueAsDate) {
+        var vd = dateEl.valueAsDate;
+        var y = vd.getUTCFullYear();
+        var mo = vd.getUTCMonth() + 1;
+        var dy = vd.getUTCDate();
+        datumISO = y + '-' + (mo<10?'0'+mo:mo) + '-' + (dy<10?'0'+dy:dy);
+      } else {
+        datumISO = parseDate(dateEl.value);
+      }
       if (!datumISO) { toast('Bitte Datum auswählen.', 'err'); return; }
-      body = {
-        titel: titel,
-        datum: datumISO,
-        uhrzeit_von: val('f-von'),
-        uhrzeit_bis: val('f-bis'),
-        ort: val('f-ort'),
-        adresse: val('f-adresse'),
-        maps_link: val('f-maps'),
-        eintritt_frei: chk('f-frei')
-      };
-    } else if (currentType === 'galerie') {
+      body = { titel:titel, datum:datumISO, uhrzeit_von:val('f-von'), uhrzeit_bis:val('f-bis'), ort:val('f-ort'), adresse:val('f-adresse'), maps_link:val('f-maps'), eintritt_frei:chkd('f-frei') };
+    }
+    else if (type === 'galerie') {
       table = 'galerie';
       var titel = val('f-titel');
       if (!titel) { toast('Bitte Titel ausfüllen.', 'err'); return; }
-      body = {
-        titel: titel,
-        jahr: num('f-jahr') || null,
-        breit: chk('f-breit'),
-        reihenfolge: num('f-sort'),
-        bild_url: uploadedImageUrl
-      };
-    } else if (currentType === 'musiker') {
+      body = { titel:titel, jahr:toInt('f-jahr')||null, breit:chkd('f-breit'), reihenfolge:toInt('f-sort'), bild_url:imgUrl };
+    }
+    else if (type === 'musiker') {
       table = 'musiker';
       var name = val('f-name');
       if (!name) { toast('Bitte Name ausfüllen.', 'err'); return; }
-      body = {
-        name: name,
-        instrument: val('f-instrument'),
-        register: val('f-register'),
-        beschreibung: val('f-beschreibung'),
-        reihenfolge: num('f-sort'),
-        bild_url: uploadedImageUrl
-      };
+      body = { name:name, instrument:val('f-instr'), register:val('f-reg'), beschreibung:val('f-desc'), reihenfolge:toInt('f-sort'), bild_url:imgUrl };
     }
 
-    if (editingId) {
-      await sbFetch('/rest/v1/' + table + '?id=eq.' + editingId, {
-        method: 'PATCH',
-        body: JSON.stringify(body)
-      });
+    if (id) {
+      await sb('/rest/v1/' + table + '?id=eq.' + id, 'PATCH', body);
     } else {
-      await sbFetch('/rest/v1/' + table, {
-        method: 'POST',
-        headers: {'Prefer': 'return=minimal'},
-        body: JSON.stringify(body)
-      });
+      await sb('/rest/v1/' + table, 'POST', body, { 'Prefer': 'return=minimal' });
     }
 
-    const savedType = currentType;
-    toast(editingId ? 'Eintrag aktualisiert!' : 'Eintrag gespeichert!', 'ok');
+    toast(id ? 'Aktualisiert!' : 'Gespeichert!', 'ok');
     closeModal();
-    if (savedType === 'termin') loadTermine();
-    else if (savedType === 'galerie') loadGalerie();
-    else loadMusiker();
+
+    // Reload AFTER closeModal, using saved type variable
+    if (type === 'termin') loadTermine();
+    else if (type === 'galerie') loadGalerie();
+    else if (type === 'musiker') loadMusiker();
 
   } catch(e) {
     toast('Fehler: ' + e.message, 'err');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Speichern';
   }
+
+  btn.disabled = false;
+  btn.textContent = 'Speichern';
 }
 
 // ── EDIT & DELETE ──
 async function editEntry(type, id) {
   var table = type === 'termin' ? 'termine' : type;
   try {
-    var data = await sbFetch('/rest/v1/' + table + '?id=eq.' + id + '&select=*');
-    openModal(type, data[0]);
-    editingId = id;
-  } catch(e) { toast('Fehler beim Laden: ' + e.message, 'err'); }
+    var rows = await sb('/rest/v1/' + table + '?id=eq.' + id + '&select=*', 'GET');
+    if (!rows || !rows.length) throw new Error('Nicht gefunden');
+    openModal(type, rows[0]);
+    mId = id;
+  } catch(e) { toast('Fehler: ' + e.message, 'err'); }
 }
 
-async function deleteEntry(table, id, reload) {
+async function delEntry(table, id, reload) {
   if (!confirm('Eintrag wirklich löschen?')) return;
   try {
-    await sbFetch('/rest/v1/' + table + '?id=eq.' + id, {method: 'DELETE'});
-    toast('Eintrag gelöscht.', 'ok');
+    await sb('/rest/v1/' + table + '?id=eq.' + id, 'DELETE');
+    toast('Gelöscht.', 'ok');
     reload();
   } catch(e) { toast('Fehler: ' + e.message, 'err'); }
 }
