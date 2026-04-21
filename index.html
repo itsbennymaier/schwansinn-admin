@@ -270,7 +270,7 @@ async function loadAll() { await Promise.all([loadTermine(), loadGalerie(), load
 async function loadTermine() {
   const el = document.getElementById('list-termine');
   try {
-    const data = await sbFetch('/rest/v1/termine?select=*&order=datum.asc');
+    const data = await sbFetch('/rest/v1/termine?select=*&order=datum.desc');
     document.getElementById('cnt-termine').textContent = data.length + ' Einträge';
     if (!data.length) { el.innerHTML = '<div class="empty">Noch keine Termine eingetragen.</div>'; return; }
     el.innerHTML = data.map(t => `
@@ -354,10 +354,7 @@ function buildForm(type, d={}) {
       <div class="fg"><label>Datum *</label><input id="f-datum" type="date" value="${d.datum||''}"></div>
       <div class="fg"><label>Uhrzeit von</label><input id="f-von" value="${d.uhrzeit_von||''}" placeholder="19:00"></div>
     </div>
-    <div class="frow">
-      <div class="fg"><label>Uhrzeit bis</label><input id="f-bis" value="${d.uhrzeit_bis||''}" placeholder="22:00"></div>
-      <div class="fg"><label>Reihenfolge</label><input id="f-sort" type="number" value="${d.reihenfolge||0}"></div>
-    </div>
+    <div class="fg"><label>Uhrzeit bis</label><input id="f-bis" value="${d.uhrzeit_bis||''}" placeholder="22:00"></div>
     <div class="fg"><label>Ort / Veranstaltungsname</label><input id="f-ort" value="${d.ort||''}" placeholder="Festplatz Musterhausen"></div>
     <div class="fg"><label>Adresse</label><input id="f-adresse" value="${d.adresse||''}" placeholder="Musterstraße 1, 12345 Musterstadt"></div>
     <div class="fg"><label>Google Maps Link</label><input id="f-maps" value="${d.maps_link||''}" placeholder="https://maps.google.com/..."></div>
@@ -443,7 +440,7 @@ async function saveEntry() {
   try {
     let body = {};
     if (currentType === 'termin') {
-      body = {titel: v('f-titel'), datum: v('f-datum'), uhrzeit_von: v('f-von'), uhrzeit_bis: v('f-bis'), ort: v('f-ort'), adresse: v('f-adresse'), maps_link: v('f-maps'), eintritt_frei: cb('f-frei'), reihenfolge: num('f-sort')};
+      body = {titel: v('f-titel'), datum: v('f-datum'), uhrzeit_von: v('f-von'), uhrzeit_bis: v('f-bis'), ort: v('f-ort'), adresse: v('f-adresse'), maps_link: v('f-maps'), eintritt_frei: cb('f-frei')};
       if (!body.titel || !body.datum) { toast('Bitte Titel und Datum ausfüllen.', 'err'); return; }
     } else if (currentType === 'galerie') {
       body = {titel: v('f-titel'), jahr: num('f-jahr'), breit: cb('f-breit'), reihenfolge: num('f-sort'), bild_url: uploadedImageUrl};
