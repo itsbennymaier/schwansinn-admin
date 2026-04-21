@@ -234,8 +234,9 @@ async function sbFetch(path, opts) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.message || err.error_description || res.statusText);
   }
-  if (res.status === 204) return null;
-  return res.json();
+  const text = await res.text();
+  if (!text || !text.trim()) return null;
+  try { return JSON.parse(text); } catch(e) { return null; }
 }
 
 async function uploadImage(file) {
@@ -536,10 +537,11 @@ async function saveEntry() {
       });
     }
 
+    const savedType = currentType;
     toast(editingId ? 'Eintrag aktualisiert!' : 'Eintrag gespeichert!', 'ok');
     closeModal();
-    if (currentType === 'termin') loadTermine();
-    else if (currentType === 'galerie') loadGalerie();
+    if (savedType === 'termin') loadTermine();
+    else if (savedType === 'galerie') loadGalerie();
     else loadMusiker();
 
   } catch(e) {
