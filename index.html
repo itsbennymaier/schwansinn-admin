@@ -10,7 +10,7 @@
   --a:#f9b235;--a2:#ffca5a;
   --bg:#09080c;--s1:#111018;--s2:#1a1824;--s3:#221f2e;
   --bd:#2a2738;--t:#f0ede8;--m:#8a869a;
-  --red:#e05252;--grn:#4ecb71;--r:10px;
+  --red:#e05252;--grn:#4ecb71;--blue:#5b8dee;--r:10px;
 }
 html,body{height:100%}
 body{background:var(--bg);color:var(--t);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.5;display:flex;min-height:100vh}
@@ -23,132 +23,183 @@ a{color:inherit;text-decoration:none}
 
 /* ── SIDEBAR ── */
 .sidebar{width:240px;flex-shrink:0;background:var(--s1);border-right:1px solid var(--bd);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;transition:transform .3s}
-.sb-logo{padding:1.5rem 1.25rem 1.25rem;border-bottom:1px solid var(--bd)}
-.sb-logo img{height:38px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
-.sb-logo-txt{font-size:.95rem;font-weight:900;color:var(--a);letter-spacing:.08em}
-.sb-nav{flex:1;padding:1rem 0;overflow-y:auto}
-.sb-section{font-size:.62rem;text-transform:uppercase;letter-spacing:.2em;color:var(--m);padding:.5rem 1.25rem .35rem;margin-top:.5rem}
-.sb-item{display:flex;align-items:center;gap:.75rem;padding:.65rem 1.25rem;margin:0 .5rem;border-radius:8px;cursor:pointer;transition:background .2s,color .2s;color:var(--m);font-size:.875rem;font-weight:500}
+.sb-logo{padding:1.35rem 1.25rem 1.1rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.65rem}
+.sb-logo img{height:36px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
+.sb-logo-txt{font-size:.85rem;font-weight:900;color:var(--a);letter-spacing:.06em}
+.sb-nav{flex:1;padding:.75rem 0;overflow-y:auto}
+.sb-sec{font-size:.6rem;text-transform:uppercase;letter-spacing:.22em;color:var(--m);padding:.6rem 1.25rem .3rem;margin-top:.35rem}
+.sb-item{display:flex;align-items:center;gap:.7rem;padding:.6rem 1.1rem;margin:0 .5rem .1rem;border-radius:8px;cursor:pointer;transition:background .2s,color .2s;color:var(--m);font-size:.85rem;font-weight:500}
 .sb-item:hover{background:var(--s2);color:var(--t)}
 .sb-item.active{background:rgba(249,178,53,.1);color:var(--a);font-weight:600}
-.sb-item .ico{font-size:1rem;width:1.25rem;text-align:center;flex-shrink:0}
-.sb-item .badge{margin-left:auto;background:rgba(249,178,53,.15);color:var(--a);font-size:.65rem;font-weight:700;padding:.15rem .55rem;border-radius:20px;min-width:22px;text-align:center}
-.sb-item .badge.arc{background:rgba(138,134,154,.12);color:var(--m)}
-.sb-bottom{padding:1rem .5rem;border-top:1px solid var(--bd)}
-.sb-user{display:flex;align-items:center;gap:.75rem;padding:.65rem .75rem;border-radius:8px;margin-bottom:.5rem}
-.sb-avatar{width:32px;height:32px;border-radius:50%;background:rgba(249,178,53,.15);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--a);flex-shrink:0}
-.sb-uname{font-size:.78rem;font-weight:600;color:var(--t);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
-.sb-urole{font-size:.65rem;color:var(--m)}
-.btn-logout{display:flex;align-items:center;gap:.65rem;width:100%;padding:.6rem .75rem;border-radius:8px;background:none;border:1px solid var(--bd);color:var(--m);cursor:pointer;font-size:.8rem;transition:all .2s}
+.sb-item .ico{font-size:.95rem;width:1.15rem;text-align:center;flex-shrink:0}
+.sb-item .bdg{margin-left:auto;background:rgba(249,178,53,.15);color:var(--a);font-size:.62rem;font-weight:700;padding:.12rem .5rem;border-radius:20px;min-width:20px;text-align:center}
+.sb-item .bdg.dim{background:rgba(138,134,154,.1);color:var(--m)}
+.sb-bottom{padding:.75rem .5rem;border-top:1px solid var(--bd)}
+.sb-user{display:flex;align-items:center;gap:.65rem;padding:.6rem .75rem;margin-bottom:.4rem}
+.sb-av{width:30px;height:30px;border-radius:50%;background:rgba(249,178,53,.15);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--a);flex-shrink:0}
+.sb-uname{font-size:.75rem;font-weight:600;color:var(--t);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
+.sb-urole{font-size:.62rem;color:var(--m)}
+.btn-logout{display:flex;align-items:center;gap:.6rem;width:100%;padding:.55rem .75rem;border-radius:8px;background:none;border:1px solid var(--bd);color:var(--m);cursor:pointer;font-size:.78rem;transition:all .2s}
 .btn-logout:hover{border-color:var(--red);color:var(--red);background:rgba(224,82,82,.06)}
 
 /* ── MAIN ── */
 .main{flex:1;margin-left:240px;display:flex;flex-direction:column;min-height:100vh}
-.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:.875rem 1.75rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
-.topbar-title{font-size:1.1rem;font-weight:800;color:var(--t)}
-.topbar-sub{font-size:.75rem;color:var(--m);margin-top:.1rem}
-.topbar-r{display:flex;align-items:center;gap:.75rem}
-.status-dot{width:8px;height:8px;border-radius:50%;background:var(--grn);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.status-txt{font-size:.75rem;color:var(--m)}
-.mob-tog{display:none;background:none;border:none;color:var(--t);font-size:1.3rem;cursor:pointer;padding:.25rem}
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:.8rem 1.75rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-left{min-width:0}
+.topbar-title{font-size:1.05rem;font-weight:800;color:var(--t)}
+.topbar-sub{font-size:.72rem;color:var(--m);margin-top:.08rem}
+.topbar-r{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--grn);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.live-txt{font-size:.72rem;color:var(--m)}
+.mob-tog{display:none;background:none;border:none;color:var(--t);font-size:1.25rem;cursor:pointer;padding:.25rem}
+.content{flex:1;padding:1.75rem}
 
-.content{flex:1;padding:2rem 1.75rem}
+/* ── SESSION WARNING ── */
+.sess-warn{position:fixed;bottom:5rem;right:1.25rem;background:var(--s1);border:1px solid rgba(249,178,53,.4);border-radius:10px;padding:.875rem 1.25rem;z-index:8000;display:none;box-shadow:0 8px 32px rgba(0,0,0,.4);max-width:320px}
+.sess-warn p{font-size:.82rem;color:var(--t);margin-bottom:.65rem}
+.sess-warn p span{color:var(--a);font-weight:700}
+.sess-btns{display:flex;gap:.5rem}
 
-/* ── STAT CARDS ── */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
-.stat-card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:1.25rem 1.5rem;position:relative;overflow:hidden;transition:border-color .2s}
-.stat-card:hover{border-color:rgba(249,178,53,.25)}
-.stat-card::after{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(249,178,53,.06),transparent 70%);border-radius:50%;pointer-events:none}
-.stat-ico{font-size:1.4rem;margin-bottom:.75rem;opacity:.8}
-.stat-val{font-size:2rem;font-weight:900;color:var(--a);line-height:1}
-.stat-lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m);margin-top:.35rem}
+/* ── STATS ── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.875rem;margin-bottom:1.75rem}
+.stat-card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:1.1rem 1.35rem;position:relative;overflow:hidden;transition:border-color .2s,transform .2s;cursor:default}
+.stat-card:hover{border-color:rgba(249,178,53,.2);transform:translateY(-1px)}
+.stat-card::after{content:'';position:absolute;top:-16px;right:-16px;width:64px;height:64px;background:radial-gradient(circle,rgba(249,178,53,.07),transparent 70%);border-radius:50%;pointer-events:none}
+.stat-ico{font-size:1.25rem;margin-bottom:.6rem}
+.stat-val{font-size:1.85rem;font-weight:900;color:var(--a);line-height:1}
+.stat-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m);margin-top:.3rem}
 
-/* ── SECTIONS ── */
+/* ── ACTIVITY LOG ── */
+.log-list{display:grid;gap:.4rem}
+.log-item{display:flex;align-items:center;gap:.75rem;padding:.55rem .75rem;background:var(--s1);border-radius:8px;border:1px solid var(--bd)}
+.log-ico{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.82rem;flex-shrink:0}
+.log-ico.add{background:rgba(78,203,113,.1)}
+.log-ico.edit{background:rgba(91,141,238,.1)}
+.log-ico.del{background:rgba(224,82,82,.1)}
+.log-ico.dup{background:rgba(249,178,53,.1)}
+.log-txt{flex:1;font-size:.78rem;color:var(--t)}
+.log-txt span{color:var(--m)}
+.log-time{font-size:.7rem;color:var(--m);flex-shrink:0;white-space:nowrap}
+.log-empty{text-align:center;padding:1.5rem;color:var(--m);font-size:.82rem}
+
+/* ── QUICK ACTIONS ── */
+.quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem;margin-bottom:1.75rem}
+.quick-btn{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.875rem .75rem;cursor:pointer;transition:all .2s;text-align:center;color:var(--m);font-size:.8rem;font-weight:600}
+.quick-btn:hover{border-color:var(--a);color:var(--a);background:rgba(249,178,53,.04);transform:translateY(-1px)}
+.quick-btn .qico{font-size:1.2rem;display:block;margin-bottom:.35rem}
+
+/* ── PANES ── */
 .pane{display:none}
 .pane.on{display:block}
-.pane-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem}
-.pane-ttl{font-size:1.2rem;font-weight:800}
+.pane-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem}
+.pane-ttl{font-size:1.1rem;font-weight:800}
+
+/* ── SECTION HEADER ── */
+.sec-hd{font-size:.68rem;text-transform:uppercase;letter-spacing:.15em;color:var(--m);margin-bottom:.65rem;margin-top:1.5rem;display:flex;align-items:center;gap:.75rem}
+.sec-hd:first-child{margin-top:0}
+.sec-hd::after{content:'';flex:1;height:1px;background:var(--bd)}
 
 /* ── SUBTABS ── */
-.subtabs{display:flex;gap:.35rem;background:var(--s2);border-radius:8px;padding:.25rem;margin-bottom:1.25rem;width:fit-content}
-.stab{padding:.4rem 1rem;border-radius:6px;font-size:.78rem;font-weight:600;color:var(--m);cursor:pointer;transition:all .2s}
+.subtabs{display:flex;gap:.3rem;background:var(--s2);border-radius:8px;padding:.22rem;margin-bottom:1rem;width:fit-content}
+.stab{padding:.38rem .95rem;border-radius:6px;font-size:.76rem;font-weight:600;color:var(--m);cursor:pointer;transition:all .2s}
 .stab.on{background:var(--s1);color:var(--t);box-shadow:0 1px 4px rgba(0,0,0,.3)}
 
 /* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:7px;font-size:.82rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:.35rem;padding:.52rem 1.05rem;border-radius:7px;font-size:.8rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-p{background:var(--a);color:#000}.btn-p:hover{background:var(--a2);transform:translateY(-1px)}
-.btn-sm{padding:.35rem .8rem;font-size:.75rem}
+.btn-sm{padding:.32rem .75rem;font-size:.73rem}
 .btn-e{background:var(--s2);color:var(--t);border:1px solid var(--bd)}.btn-e:hover{border-color:var(--a);color:var(--a)}
 .btn-d{background:var(--s2);color:var(--red);border:1px solid var(--bd)}.btn-d:hover{background:rgba(224,82,82,.08);border-color:var(--red)}
+.btn-dup{background:var(--s2);color:var(--m);border:1px solid var(--bd)}.btn-dup:hover{border-color:var(--a);color:var(--a)}
 .btn-o{background:none;border:1px solid var(--bd);color:var(--t)}.btn-o:hover{border-color:var(--a);color:var(--a)}
+.btn-danger{background:rgba(224,82,82,.08);border:1px solid rgba(224,82,82,.3);color:var(--red)}.btn-danger:hover{background:rgba(224,82,82,.15)}
 
-/* ── LIST ── */
-.list{display:grid;gap:.5rem}
-.card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.875rem;transition:border-color .2s}
+/* ── LIST / CARDS ── */
+.list{display:grid;gap:.45rem}
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.8rem 1rem;display:flex;align-items:center;gap:.8rem;transition:border-color .2s}
 .card:hover{border-color:#3a3650}
-.card-thumb{width:48px;height:48px;border-radius:8px;background:var(--s2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;overflow:hidden}
-.card-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.card.drag-over{border-color:var(--a);background:rgba(249,178,53,.04)}
+.card.dragging{opacity:.4}
+.drag-handle{color:var(--bd);cursor:grab;font-size:.9rem;flex-shrink:0;user-select:none;padding:.1rem}
+.drag-handle:hover{color:var(--m)}
+.card-thumb{width:44px;height:44px;border-radius:7px;background:var(--s2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1rem;overflow:hidden}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;transition:opacity .2s}
+.card-thumb img:hover{opacity:.8}
 .card-info{flex:1;min-width:0}
-.card-name{font-weight:700;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--t)}
-.card-sub{font-size:.76rem;color:var(--m);margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-btns{display:flex;gap:.4rem;flex-shrink:0}
-.arc-badge{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;background:rgba(138,134,154,.12);color:var(--m);padding:.18rem .6rem;border-radius:20px;font-weight:600;flex-shrink:0}
-.empty{text-align:center;padding:3rem;background:var(--s1);border-radius:12px;color:var(--m);font-size:.88rem;border:1px dashed var(--bd)}
-.loading{text-align:center;padding:2.5rem;color:var(--m);font-size:.85rem}
+.card-name{font-weight:700;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--t)}
+.card-sub{font-size:.73rem;color:var(--m);margin-top:.12rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-btns{display:flex;gap:.35rem;flex-shrink:0}
+.arc-tag{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;background:rgba(138,134,154,.1);color:var(--m);padding:.15rem .55rem;border-radius:20px;font-weight:600;flex-shrink:0}
+.drag-saving{font-size:.72rem;color:var(--a);text-align:center;padding:.5rem;display:none}
+.empty{text-align:center;padding:2.5rem;background:var(--s1);border-radius:12px;color:var(--m);font-size:.85rem;border:1px dashed var(--bd)}
+.loading{text-align:center;padding:2.5rem;color:var(--m);font-size:.82rem}
 
 /* ── MODAL ── */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:flex;align-items:center;justify-content:center;padding:1.25rem;backdrop-filter:blur(4px)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:500;display:flex;align-items:center;justify-content:center;padding:1.25rem;backdrop-filter:blur(4px)}
 .modal{background:var(--s1);border:1px solid var(--bd);border-radius:14px;width:100%;max-width:520px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.5)}
-.mhead{padding:1.25rem 1.5rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.mhead h3{font-size:1rem;font-weight:800}
-.mclose{background:none;border:none;color:var(--m);font-size:1.4rem;cursor:pointer;border-radius:6px;padding:.2rem .35rem;transition:all .2s;line-height:1}
+.mhead{padding:1.15rem 1.4rem;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.mhead h3{font-size:.95rem;font-weight:800}
+.mclose{background:none;border:none;color:var(--m);font-size:1.35rem;cursor:pointer;border-radius:6px;padding:.15rem .35rem;transition:all .2s;line-height:1}
 .mclose:hover{color:var(--t);background:var(--s2)}
-.mbody{padding:1.5rem;overflow-y:auto;flex:1}
-.mfoot{padding:1rem 1.5rem;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:.65rem;flex-shrink:0}
+.mbody{padding:1.35rem;overflow-y:auto;flex:1}
+.mfoot{padding:.875rem 1.35rem;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:.55rem;flex-shrink:0}
 
-/* ── FORM FIELDS ── */
-.fg{display:grid;gap:.28rem;margin-bottom:.875rem}
-.fg label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m);font-weight:600}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.fg-hint{font-size:.7rem;color:var(--m);margin-top:.25rem}
+/* ── FORM ── */
+.fg{display:grid;gap:.25rem;margin-bottom:.8rem}
+.fg label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m);font-weight:600}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.fg-hint{font-size:.68rem;color:var(--m);margin-top:.22rem}
 
-/* ── TOGGLE SWITCH ── */
-.tog-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.875rem;padding:.5rem 0}
-.tog-wrap{position:relative;width:40px;height:22px;flex-shrink:0}
-.tog-inp{position:absolute;opacity:0;width:0;height:0}
-.tog-track{position:absolute;inset:0;background:var(--bd);border-radius:22px;cursor:pointer;transition:background .2s}
+/* ── TOGGLE ── */
+.tog-row{display:flex;align-items:center;gap:.7rem;margin-bottom:.8rem;padding:.35rem 0;cursor:pointer}
+.tog-wrap{position:relative;width:38px;height:21px;flex-shrink:0}
+.tog-inp{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+.tog-track{position:absolute;inset:0;background:var(--bd);border-radius:21px;transition:background .22s;cursor:pointer}
 .tog-inp:checked+.tog-track{background:var(--a)}
-.tog-thumb{position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .2s;pointer-events:none}
-.tog-inp:checked~.tog-thumb{transform:translateX(18px)}
-.tog-lbl{font-size:.875rem;cursor:pointer;color:var(--t)}
+.tog-thumb{position:absolute;top:3px;left:3px;width:15px;height:15px;background:#fff;border-radius:50%;transition:transform .22s;pointer-events:none}
+.tog-inp:checked~.tog-thumb{transform:translateX(17px)}
+.tog-lbl{font-size:.85rem;color:var(--t);user-select:none}
 
 /* ── IMAGE UPLOAD ── */
-.uploader{border:2px dashed var(--bd);border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:var(--s2)}
+.uploader{border:2px dashed var(--bd);border-radius:10px;padding:1.35rem;text-align:center;cursor:pointer;transition:all .2s;background:var(--s2)}
 .uploader:hover{border-color:var(--a);background:rgba(249,178,53,.03)}
-.up-ico{font-size:1.75rem;color:var(--m);margin-bottom:.4rem}
-.up-txt{font-size:.8rem;color:var(--m)}.up-txt strong{color:var(--a)}
-.up-prev{width:100%;max-height:140px;object-fit:cover;border-radius:7px;margin-top:.75rem}
-.up-prog-w{height:3px;background:var(--bd);border-radius:2px;margin-top:.6rem;display:none}
+.up-ico{font-size:1.6rem;color:var(--m);margin-bottom:.35rem}
+.up-txt{font-size:.78rem;color:var(--m)}.up-txt strong{color:var(--a)}
+.up-prev{width:100%;max-height:130px;object-fit:cover;border-radius:7px;margin-top:.65rem}
+.up-prog-w{height:3px;background:var(--bd);border-radius:2px;margin-top:.55rem;display:none}
 .up-prog{height:100%;background:var(--a);border-radius:2px;width:0;transition:width .35s}
-.up-status{font-size:.7rem;color:var(--m);margin-top:.3rem}
+.up-status{font-size:.68rem;color:var(--m);margin-top:.28rem}
+
+/* ── SETTINGS ── */
+.set-card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:1.35rem;margin-bottom:1rem}
+.set-card-ttl{font-size:.78rem;font-weight:700;color:var(--t);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.08em}
+.set-note{background:rgba(91,141,238,.07);border:1px solid rgba(91,141,238,.2);border-radius:8px;padding:.75rem 1rem;font-size:.78rem;color:#8aabdf;margin-bottom:1rem;line-height:1.6}
+
+/* ── IMAGE LIGHTBOX ── */
+.img-lb{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9500;display:none;align-items:center;justify-content:center;padding:1.25rem;cursor:pointer}
+.img-lb.on{display:flex}
+.img-lb img{max-width:100%;max-height:90vh;object-fit:contain;border-radius:8px;cursor:default}
+.img-lb-x{position:absolute;top:1rem;right:1.25rem;font-size:1.7rem;color:#666;cursor:pointer;transition:color .2s;line-height:1}
+.img-lb-x:hover{color:#fff}
 
 /* ── LOGIN ── */
 #login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;padding:1.5rem}
-.lbox{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:2.5rem;width:100%;max-width:380px;box-shadow:0 24px 64px rgba(0,0,0,.5)}
-.lbox-brand{display:flex;align-items:center;gap:.75rem;margin-bottom:2rem}
-.lbox-brand img{height:36px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
-.lbox-brand-txt{font-size:.95rem;font-weight:900;color:var(--a)}
-.lbox h2{font-size:1.05rem;font-weight:800;margin-bottom:1.5rem;color:var(--t)}
-.lfg{display:grid;gap:.28rem;margin-bottom:.875rem}
-.lfg label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m);font-weight:600}
-.l-err{color:var(--red);font-size:.78rem;margin-bottom:.75rem;display:none;padding:.5rem .75rem;background:rgba(224,82,82,.08);border-radius:6px;border:1px solid rgba(224,82,82,.2)}
+.lbox{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:2.35rem;width:100%;max-width:370px;box-shadow:0 24px 64px rgba(0,0,0,.5)}
+.lbox-brand{display:flex;align-items:center;gap:.7rem;margin-bottom:1.75rem}
+.lbox-brand img{height:34px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
+.lbox-brand-txt{font-size:.9rem;font-weight:900;color:var(--a)}
+.lbox h2{font-size:1rem;font-weight:800;margin-bottom:1.35rem;color:var(--t)}
+.lfg{display:grid;gap:.25rem;margin-bottom:.8rem}
+.lfg label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--m);font-weight:600}
+.l-err{color:var(--red);font-size:.76rem;margin-bottom:.7rem;display:none;padding:.45rem .7rem;background:rgba(224,82,82,.08);border-radius:6px;border:1px solid rgba(224,82,82,.18)}
 
 /* ── TOAST ── */
-.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.875rem 1.25rem;font-size:.82rem;z-index:9000;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;max-width:300px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.toast{position:fixed;bottom:1.25rem;right:1.25rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.8rem 1.15rem;font-size:.8rem;z-index:9000;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;max-width:280px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
 .toast.show{opacity:1;transform:none}
 .toast.ok{border-left:3px solid var(--grn);color:var(--grn)}
 .toast.err{border-left:3px solid var(--red);color:var(--red)}
+.toast.info{border-left:3px solid var(--blue);color:var(--blue)}
 
 /* ── MOB OVERLAY ── */
 .mob-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99;display:none}
@@ -160,9 +211,10 @@ a{color:inherit;text-decoration:none}
   .sidebar.mob-open{transform:none}
   .main{margin-left:0}
   .mob-tog{display:block}
-  .content{padding:1.25rem 1rem}
+  .content{padding:1rem}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .frow{grid-template-columns:1fr}
+  .card-btns{flex-wrap:wrap}
 }
 @media(min-width:769px){.mob-tog{display:none!important}}
 </style>
@@ -173,73 +225,84 @@ a{color:inherit;text-decoration:none}
 <div id="login-screen">
   <div class="lbox">
     <div class="lbox-brand">
-      <img src="https://hqkpckckzegxqghdchrd.supabase.co/storage/v1/object/public/bilder/Logo-Schwansinn.svg" alt="Schwansinn" onerror="this.style.display='none'">
-      <span class="lbox-brand-txt">Admin</span>
+      <img src="https://hqkpckckzegxqghdchrd.supabase.co/storage/v1/object/public/bilder/Logo-Schwansinn.svg" alt="" onerror="this.style.display='none'">
+      <span class="lbox-brand-txt">Admin-Panel</span>
     </div>
     <h2>Anmelden</h2>
     <div class="lfg"><label>E-Mail</label><input type="email" id="l-email" placeholder="deine@email.de" autocomplete="email"></div>
     <div class="lfg"><label>Passwort</label><input type="password" id="l-pw" placeholder="••••••••" autocomplete="current-password"></div>
-    <p class="l-err" id="l-err">E-Mail oder Passwort falsch.</p>
-    <button class="btn btn-p" id="l-btn" style="width:100%;padding:.8rem;font-size:.92rem;justify-content:center;margin-top:.25rem" onclick="doLogin()">Anmelden</button>
+    <p class="l-err" id="l-err">Anmeldung fehlgeschlagen.</p>
+    <button class="btn btn-p" id="l-btn" style="width:100%;padding:.78rem;font-size:.9rem;justify-content:center;margin-top:.2rem" onclick="doLogin()">Anmelden</button>
   </div>
 </div>
 
-<!-- MOB SIDEBAR OVERLAY -->
+<!-- SESSION WARNING -->
+<div class="sess-warn" id="sess-warn">
+  <p>Deine Sitzung läuft in <span id="sess-cd">5:00</span> Minuten ab.</p>
+  <div class="sess-btns">
+    <button class="btn btn-p btn-sm" onclick="extendSession()">Verlängern</button>
+    <button class="btn btn-o btn-sm" onclick="doLogout()">Abmelden</button>
+  </div>
+</div>
+
+<!-- MOB OVERLAY -->
 <div class="mob-overlay" id="mob-overlay" onclick="closeSidebar()"></div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
   <div class="sb-logo">
-    <img src="https://hqkpckckzegxqghdchrd.supabase.co/storage/v1/object/public/bilder/Logo-Schwansinn.svg" alt="Schwansinn" onerror="this.outerHTML='<div class=\'sb-logo-txt\'>Schwansinn</div>'">
+    <img src="https://hqkpckckzegxqghdchrd.supabase.co/storage/v1/object/public/bilder/Logo-Schwansinn.svg" alt="" onerror="this.style.display='none'">
+    <span class="sb-logo-txt">Schwansinn</span>
   </div>
   <nav class="sb-nav">
-    <div class="sb-section">Navigation</div>
-    <div class="sb-item active" onclick="goPane('dashboard')" id="nav-dashboard"><span class="ico">◈</span> Dashboard</div>
-    <div class="sb-item" onclick="goPane('termine')" id="nav-termine"><span class="ico">🗓</span> Termine <span class="badge" id="bdg-termine">–</span></div>
-    <div class="sb-item" onclick="goPane('galerie')" id="nav-galerie"><span class="ico">🖼</span> Galerie <span class="badge" id="bdg-galerie">–</span></div>
-    <div class="sb-item" onclick="goPane('musiker')" id="nav-musiker"><span class="ico">🎺</span> Musiker <span class="badge" id="bdg-musiker">–</span></div>
+    <div class="sb-sec">Inhalte</div>
+    <div class="sb-item active" onclick="goPane('dashboard')" id="nav-dashboard"><span class="ico">◈</span>Dashboard</div>
+    <div class="sb-item" onclick="goPane('termine')" id="nav-termine"><span class="ico">🗓</span>Termine<span class="bdg" id="bdg-t">–</span></div>
+    <div class="sb-item" onclick="goPane('galerie')" id="nav-galerie"><span class="ico">🖼</span>Galerie<span class="bdg" id="bdg-g">–</span></div>
+    <div class="sb-item" onclick="goPane('musiker')" id="nav-musiker"><span class="ico">🎺</span>Musiker<span class="bdg" id="bdg-m">–</span></div>
+    <div class="sb-sec">System</div>
+    <div class="sb-item" onclick="goPane('log')" id="nav-log"><span class="ico">📋</span>Aktivitätslog</div>
+    <div class="sb-item" onclick="goPane('einstellungen')" id="nav-einstellungen"><span class="ico">⚙</span>Einstellungen</div>
   </nav>
   <div class="sb-bottom">
     <div class="sb-user">
-      <div class="sb-avatar" id="sb-av">–</div>
+      <div class="sb-av" id="sb-av">–</div>
       <div><div class="sb-uname" id="sb-name">–</div><div class="sb-urole">Administrator</div></div>
     </div>
-    <button class="btn-logout" onclick="doLogout()"><span>⏻</span> Abmelden</button>
+    <button class="btn-logout" onclick="doLogout()"><span>⏻</span>Abmelden</button>
   </div>
 </aside>
 
 <!-- MAIN -->
 <div class="main">
   <header class="topbar">
-    <div>
-      <div class="topbar-title" id="topbar-title">Dashboard</div>
-      <div class="topbar-sub" id="topbar-sub">Übersicht & Schnellzugriff</div>
+    <div class="topbar-left">
+      <div class="topbar-title" id="tb-title">Dashboard</div>
+      <div class="topbar-sub" id="tb-sub">Übersicht & Schnellzugriff</div>
     </div>
     <div class="topbar-r">
-      <div class="status-dot"></div>
-      <span class="status-txt">Supabase verbunden</span>
+      <div class="live-dot"></div><span class="live-txt">Verbunden</span>
       <button class="mob-tog" onclick="openSidebar()">☰</button>
     </div>
   </header>
-
   <div class="content">
 
     <!-- DASHBOARD -->
     <div class="pane on" id="pane-dashboard">
-      <div class="stats-grid" id="stat-grid">
-        <div class="stat-card"><div class="stat-ico">🗓</div><div class="stat-val" id="st-termine">–</div><div class="stat-lbl">Aktuelle Termine</div></div>
-        <div class="stat-card"><div class="stat-ico">🖼</div><div class="stat-val" id="st-galerie">–</div><div class="stat-lbl">Galerie-Fotos</div></div>
-        <div class="stat-card"><div class="stat-ico">🎺</div><div class="stat-val" id="st-musiker">–</div><div class="stat-lbl">Musikerinnen & Musiker</div></div>
-        <div class="stat-card"><div class="stat-ico">📦</div><div class="stat-val" id="st-archiv">–</div><div class="stat-lbl">Archivierte Termine</div></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-ico">🗓</div><div class="stat-val" id="st-t">–</div><div class="stat-lbl">Aktuelle Termine</div></div>
+        <div class="stat-card"><div class="stat-ico">🖼</div><div class="stat-val" id="st-g">–</div><div class="stat-lbl">Galerie-Fotos</div></div>
+        <div class="stat-card"><div class="stat-ico">🎺</div><div class="stat-val" id="st-m">–</div><div class="stat-lbl">Musiker</div></div>
+        <div class="stat-card"><div class="stat-ico">📦</div><div class="stat-val" id="st-a">–</div><div class="stat-lbl">Im Archiv</div></div>
       </div>
-      <div style="background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:1.5rem">
-        <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;color:var(--m);margin-bottom:1rem">Schnellzugriff</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.65rem">
-          <button class="btn btn-o" style="justify-content:center;padding:.75rem" onclick="goPane('termine');openModal('termin')">+ Neuer Termin</button>
-          <button class="btn btn-o" style="justify-content:center;padding:.75rem" onclick="goPane('galerie');openModal('galerie')">+ Neues Foto</button>
-          <button class="btn btn-o" style="justify-content:center;padding:.75rem" onclick="goPane('musiker');openModal('musiker')">+ Neuer Musiker</button>
-        </div>
+      <div class="sec-hd">Schnellzugriff</div>
+      <div class="quick-grid">
+        <div class="quick-btn" onclick="goPane('termine');openModal('termin')"><span class="qico">🗓</span>Neuer Termin</div>
+        <div class="quick-btn" onclick="goPane('galerie');openModal('galerie')"><span class="qico">🖼</span>Neues Foto</div>
+        <div class="quick-btn" onclick="goPane('musiker');openModal('musiker')"><span class="qico">🎺</span>Neuer Musiker</div>
       </div>
+      <div class="sec-hd">Letzte Aktivitäten</div>
+      <div id="dash-log"></div>
     </div>
 
     <!-- TERMINE -->
@@ -249,11 +312,16 @@ a{color:inherit;text-decoration:none}
         <button class="btn btn-p" onclick="openModal('termin')">+ Neuer Termin</button>
       </div>
       <div class="subtabs">
-        <div class="stab on" id="stab-aktuell" onclick="switchSubTab('aktuell')">Aktuell</div>
-        <div class="stab" id="stab-archiv" onclick="switchSubTab('archiv')">Archiv</div>
+        <div class="stab on" id="stab-akt" onclick="switchTermineTab('akt')">Aktuell</div>
+        <div class="stab" id="stab-arc" onclick="switchTermineTab('arc')">Archiv</div>
       </div>
-      <div class="list" id="list-termine-aktuell"></div>
-      <div class="list" id="list-termine-archiv" style="display:none"></div>
+      <div id="list-t-akt"></div>
+      <div id="list-t-arc" style="display:none">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:.75rem">
+          <button class="btn btn-danger btn-sm" onclick="bulkClearArchive()">🗑 Archiv leeren</button>
+        </div>
+        <div id="list-t-arc-inner"></div>
+      </div>
     </div>
 
     <!-- GALERIE -->
@@ -262,7 +330,8 @@ a{color:inherit;text-decoration:none}
         <div class="pane-ttl">Galerie</div>
         <button class="btn btn-p" onclick="openModal('galerie')">+ Neues Foto</button>
       </div>
-      <div class="list" id="list-galerie"></div>
+      <div class="drag-saving" id="ds-galerie">Reihenfolge wird gespeichert…</div>
+      <div class="list" id="list-g"></div>
     </div>
 
     <!-- MUSIKER -->
@@ -271,7 +340,45 @@ a{color:inherit;text-decoration:none}
         <div class="pane-ttl">Musiker</div>
         <button class="btn btn-p" onclick="openModal('musiker')">+ Neuer Musiker</button>
       </div>
-      <div class="list" id="list-musiker"></div>
+      <div class="drag-saving" id="ds-musiker">Reihenfolge wird gespeichert…</div>
+      <div class="list" id="list-m"></div>
+    </div>
+
+    <!-- AKTIVITÄTSLOG -->
+    <div class="pane" id="pane-log">
+      <div class="pane-head">
+        <div class="pane-ttl">Aktivitätslog</div>
+        <button class="btn btn-o btn-sm" onclick="clearLog()">Log leeren</button>
+      </div>
+      <div id="full-log"></div>
+    </div>
+
+    <!-- EINSTELLUNGEN -->
+    <div class="pane" id="pane-einstellungen">
+      <div class="pane-head"><div class="pane-ttl">Einstellungen</div></div>
+      <div class="set-note">ℹ Diese Einstellungen werden lokal in deinem Browser gespeichert und dienen als Referenz. Änderungen an der Live-Website müssen weiterhin im Code vorgenommen werden.</div>
+      <div class="set-card">
+        <div class="set-card-ttl">Band-Informationen</div>
+        <div class="fg"><label>Bandname</label><input id="set-name" placeholder="Blaskapelle Schwansinn"></div>
+        <div class="frow">
+          <div class="fg"><label>E-Mail</label><input id="set-email" type="email" placeholder="schwansinn@gmx.com"></div>
+          <div class="fg"><label>Telefon</label><input id="set-phone" placeholder="+49 ..."></div>
+        </div>
+        <div class="fg"><label>Standort</label><input id="set-ort" placeholder="Schwarzwald-Baar-Kreis, BW"></div>
+        <div class="fg"><label>Website</label><input id="set-web" placeholder="www.schwansinn.de"></div>
+      </div>
+      <div class="set-card">
+        <div class="set-card-ttl">Social Media</div>
+        <div class="fg"><label>Instagram</label><input id="set-ig" placeholder="@blaskapelle_schwansinn"></div>
+        <div class="fg"><label>Facebook</label><input id="set-fb" placeholder="facebook.com/schwansinn"></div>
+        <div class="fg"><label>YouTube</label><input id="set-yt" placeholder="youtube.com/@schwansinn"></div>
+      </div>
+      <div class="set-card">
+        <div class="set-card-ttl">Technische Informationen</div>
+        <div class="fg"><label>Supabase URL</label><input readonly value="https://hqkpckckzegxqghdchrd.supabase.co" style="opacity:.5;cursor:default"></div>
+        <div class="fg"><label>Admin-URL</label><input id="set-admin-url" readonly style="opacity:.5;cursor:default"></div>
+      </div>
+      <button class="btn btn-p" onclick="saveSettings()" style="padding:.72rem 2rem">Einstellungen speichern</button>
     </div>
 
   </div>
@@ -289,378 +396,444 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
+<!-- IMAGE LIGHTBOX -->
+<div class="img-lb" id="img-lb" onclick="closeImgLb()">
+  <span class="img-lb-x" onclick="closeImgLb()">×</span>
+  <img id="img-lb-src" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CONFIG (Supabase – unverändert) ──
+// ── SUPABASE CONFIG (unverändert) ──
 var SB  = 'https://hqkpckckzegxqghdchrd.supabase.co';
 var KEY = 'sb_publishable_VgY442Ty_q-Utae-8MMI8A_QPeqUz5U';
-var SESSION_TTL = 4 * 60 * 60 * 1000; // 4 Stunden
+var SESSION_TTL = 4 * 60 * 60 * 1000;
+var WARN_BEFORE  = 5 * 60 * 1000;
 
 // ── STATE ──
-var token  = null;
-var mType  = null;
-var mId    = null;
-var imgUrl = null;
-var allTermine = [];
+var token = null;
+var mType = null, mId = null, imgUrl = null;
+var galerieItems = [], musikerItems = [], allTermine = [];
+var dragIdx = -1, dragType = '';
+var warnShown = false;
 
-// ── SESSION (localStorage für GitHub Pages) ──
+// ── SESSION ──
 function saveSession(tok, email) {
-  try {
-    localStorage.setItem('sw_tok',   tok);
-    localStorage.setItem('sw_email', email);
-    localStorage.setItem('sw_exp',   Date.now() + SESSION_TTL);
-  } catch(e) {}
+  try { localStorage.setItem('sw_tok',tok); localStorage.setItem('sw_email',email); localStorage.setItem('sw_exp',Date.now()+SESSION_TTL); } catch(e){}
 }
 function loadSession() {
-  try {
-    var tok   = localStorage.getItem('sw_tok');
-    var email = localStorage.getItem('sw_email');
-    var exp   = parseInt(localStorage.getItem('sw_exp') || '0');
-    if (tok && email && Date.now() < exp) return { tok: tok, email: email };
-  } catch(e) {}
+  try { var tok=localStorage.getItem('sw_tok'),email=localStorage.getItem('sw_email'),exp=parseInt(localStorage.getItem('sw_exp')||'0'); if(tok&&email&&Date.now()<exp) return {tok,email}; } catch(e){}
   return null;
 }
-function clearSession() {
-  try { localStorage.removeItem('sw_tok'); localStorage.removeItem('sw_email'); localStorage.removeItem('sw_exp'); } catch(e) {}
+function clearSession() { try { ['sw_tok','sw_email','sw_exp'].forEach(function(k){localStorage.removeItem(k);}); } catch(e){} }
+function extendSession() {
+  try { localStorage.setItem('sw_exp', Date.now()+SESSION_TTL); } catch(e){}
+  warnShown=false; g('sess-warn').style.display='none';
+  toast('Sitzung verlängert.','ok');
+}
+function startSessionWatch() {
+  setInterval(function(){
+    try {
+      var exp = parseInt(localStorage.getItem('sw_exp')||'0');
+      if (!exp || !token) return;
+      var left = exp - Date.now();
+      if (left < 0) { doLogout(); return; }
+      if (left < WARN_BEFORE && !warnShown) {
+        warnShown = true;
+        g('sess-warn').style.display='block';
+      }
+      if (warnShown && left >= 0) {
+        var m=Math.floor(left/60000), s=Math.floor((left%60000)/1000);
+        g('sess-cd').textContent = m+':'+(s<10?'0':'')+s;
+      }
+    } catch(e){}
+  }, 10000);
+}
+
+// ── ACTIVITY LOG ──
+function logAct(action, type, name) {
+  try {
+    var log = JSON.parse(localStorage.getItem('sw_log')||'[]');
+    var icons = {add:'➕',edit:'✏️',del:'🗑',dup:'📋'};
+    var types = {termin:'Termin',galerie:'Foto',musiker:'Musiker'};
+    log.unshift({action,type,name,time:Date.now(),icon:icons[action]||'·',typeLabel:types[type]||type});
+    if(log.length>30) log=log.slice(0,30);
+    localStorage.setItem('sw_log',JSON.stringify(log));
+  } catch(e){}
+  renderLog();
+}
+function getLog() { try { return JSON.parse(localStorage.getItem('sw_log')||'[]'); } catch(e){ return []; } }
+function clearLog() { if(!confirm('Log wirklich leeren?')) return; try{localStorage.removeItem('sw_log');}catch(e){} renderLog(); toast('Log geleert.','ok'); }
+function timeAgo(ts) {
+  var d=Date.now()-ts, m=Math.floor(d/60000);
+  if(m<1) return 'gerade eben'; if(m<60) return 'vor '+m+' Min.';
+  var h=Math.floor(m/60); if(h<24) return 'vor '+h+' Std.';
+  return 'vor '+Math.floor(h/24)+' Tag(en)';
+}
+function actionLabel(a) { return {add:'hinzugefügt',edit:'bearbeitet',del:'gelöscht',dup:'dupliziert'}[a]||a; }
+function logItemHTML(entry) {
+  var cls = entry.action==='add'?'add':entry.action==='edit'?'edit':entry.action==='del'?'del':'dup';
+  return '<div class="log-item"><div class="log-ico '+cls+'">'+entry.icon+'</div>'+
+    '<div class="log-txt"><strong>'+esc(entry.name)+'</strong> <span>· '+entry.typeLabel+' '+actionLabel(entry.action)+'</span></div>'+
+    '<div class="log-time">'+timeAgo(entry.time)+'</div></div>';
+}
+function renderLog() {
+  var log = getLog();
+  // Dashboard (last 5)
+  var dl=g('dash-log'); if(dl) dl.innerHTML = log.length ? log.slice(0,5).map(logItemHTML).join('') : '<div class="log-empty">Noch keine Aktivitäten.</div>';
+  // Full log
+  var fl=g('full-log'); if(fl) fl.innerHTML = log.length ? log.map(logItemHTML).join('') : '<div class="log-empty">Noch keine Aktivitäten.</div>';
 }
 
 // ── HELPERS ──
-function g(id) { return document.getElementById(id); }
-function val(id) { var e = g(id); return e ? e.value.trim() : ''; }
-function togVal(id) { var e = g(id); return e ? e.checked : false; }
-function toInt(id) { return parseInt(val(id)) || 0; }
+function g(id){ return document.getElementById(id); }
+function val(id){ var e=g(id); return e?e.value.trim():''; }
+function togVal(id){ var e=g(id); return e?e.checked:false; }
+function toInt(id){ return parseInt(val(id))||0; }
 function parseDate(raw) {
-  if (!raw) return '';
-  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
-  if (/^\d{2}\/\d{2}\/\d{4}$/.test(raw)) { var p=raw.split('/'); return p[2]+'-'+p[1]+'-'+p[0]; }
-  if (/^\d{2}\.\d{2}\.\d{4}$/.test(raw)) { var p=raw.split('.'); return p[2]+'-'+p[1]+'-'+p[0]; }
-  var d=new Date(raw); if(!isNaN(d.getTime())) { var m=d.getUTCMonth()+1,dy=d.getUTCDate(); return d.getUTCFullYear()+'-'+(m<10?'0'+m:m)+'-'+(dy<10?'0'+dy:dy); }
+  if(!raw) return '';
+  if(/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+  if(/^\d{2}\/\d{2}\/\d{4}$/.test(raw)){var p=raw.split('/');return p[2]+'-'+p[1]+'-'+p[0];}
+  if(/^\d{2}\.\d{2}\.\d{4}$/.test(raw)){var p=raw.split('.');return p[2]+'-'+p[1]+'-'+p[0];}
+  var d=new Date(raw); if(!isNaN(d.getTime())){var m=d.getUTCMonth()+1,dy=d.getUTCDate();return d.getUTCFullYear()+'-'+(m<10?'0'+m:m)+'-'+(dy<10?'0'+dy:dy);}
   return raw;
 }
-function fmtDate(iso) { if(!iso) return '–'; return new Date(iso+'T12:00:00').toLocaleDateString('de-DE',{day:'2-digit',month:'long',year:'numeric'}); }
-function isFuture(iso) { return new Date(iso+'T23:59:59') >= new Date(); }
-function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function toast(msg, type) {
-  var el=g('toast'); el.textContent=msg; el.className='toast '+(type||'ok')+' show';
-  clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove('show');},3500);
-}
+function fmtDate(iso){ if(!iso) return '–'; return new Date(iso+'T12:00:00').toLocaleDateString('de-DE',{day:'2-digit',month:'long',year:'numeric'}); }
+function isFuture(iso){ return new Date(iso+'T23:59:59')>=new Date(); }
+function esc(s){ return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function toast(msg,type){ var el=g('toast'); el.textContent=msg; el.className='toast '+(type||'ok')+' show'; clearTimeout(el._t); el._t=setTimeout(function(){el.classList.remove('show');},3500); }
 
-// ── SUPABASE ──
-async function sb(path, method, body, extra) {
-  var headers = { 'apikey': KEY, 'Content-Type': 'application/json' };
-  if (token) headers['Authorization'] = 'Bearer ' + token;
-  if (extra) Object.assign(headers, extra);
-  var opts = { method: method || 'GET', headers: headers };
-  if (body !== undefined && body !== null) opts.body = JSON.stringify(body);
-  var res = await fetch(SB + path, opts);
-  if (!res.ok) {
-    var msg = res.statusText;
-    try { var e = await res.json(); msg = e.message || e.error_description || msg; } catch(x) {}
-    throw new Error(msg);
-  }
-  var text = await res.text();
-  if (!text || !text.trim()) return null;
-  try { return JSON.parse(text); } catch(x) { return null; }
+// ── SUPABASE (unverändert) ──
+async function sb(path,method,body,extra){
+  var headers={'apikey':KEY,'Content-Type':'application/json'};
+  if(token) headers['Authorization']='Bearer '+token;
+  if(extra) Object.assign(headers,extra);
+  var opts={method:method||'GET',headers};
+  if(body!==undefined&&body!==null) opts.body=JSON.stringify(body);
+  var res=await fetch(SB+path,opts);
+  if(!res.ok){var msg=res.statusText;try{var e=await res.json();msg=e.message||e.error_description||msg;}catch(x){}throw new Error(msg);}
+  var text=await res.text(); if(!text||!text.trim()) return null;
+  try{return JSON.parse(text);}catch(x){return null;}
 }
-async function uploadImg(file) {
-  var name = Date.now() + '.' + file.name.split('.').pop();
-  var res = await fetch(SB + '/storage/v1/object/bilder/' + name, {
-    method: 'POST',
-    headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + token, 'Content-Type': file.type },
-    body: file
-  });
-  if (!res.ok) throw new Error('Upload fehlgeschlagen');
-  return SB + '/storage/v1/object/public/bilder/' + name;
+async function uploadImg(file){
+  var name=Date.now()+'.'+file.name.split('.').pop();
+  var res=await fetch(SB+'/storage/v1/object/bilder/'+name,{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+token,'Content-Type':file.type},body:file});
+  if(!res.ok) throw new Error('Upload fehlgeschlagen');
+  return SB+'/storage/v1/object/public/bilder/'+name;
 }
 
 // ── AUTH ──
-async function doLogin() {
-  var email = val('l-email'), pw = g('l-pw').value;
-  var errEl = g('l-err'), btn = g('l-btn');
-  errEl.style.display = 'none';
-  btn.textContent = 'Anmelden…'; btn.disabled = true;
+async function doLogin(){
+  var email=val('l-email'),pw=g('l-pw').value;
+  var errEl=g('l-err'),btn=g('l-btn');
+  errEl.style.display='none'; btn.textContent='Anmelden…'; btn.disabled=true;
   try {
-    var res = await fetch(SB + '/auth/v1/token?grant_type=password', {
-      method: 'POST',
-      headers: { 'apikey': KEY, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, password: pw })
-    });
-    var data = await res.json();
-    if (!res.ok) throw new Error(data.error_description || data.msg || 'Fehler');
-    token = data.access_token;
-    saveSession(token, email);
-    startApp(email);
-  } catch(e) {
-    errEl.style.display = 'block';
-    errEl.textContent = 'Anmeldung fehlgeschlagen. Bitte E-Mail und Passwort prüfen.';
-  }
-  btn.textContent = 'Anmelden'; btn.disabled = false;
+    var res=await fetch(SB+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'apikey':KEY,'Content-Type':'application/json'},body:JSON.stringify({email,password:pw})});
+    var data=await res.json();
+    if(!res.ok) throw new Error(data.error_description||data.msg||'Fehler');
+    token=data.access_token; saveSession(token,email); startApp(email);
+  } catch(e){ errEl.style.display='block'; errEl.textContent='Anmeldung fehlgeschlagen. Bitte E-Mail und Passwort prüfen.'; }
+  btn.textContent='Anmelden'; btn.disabled=false;
 }
-g('l-pw').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
-
-function doLogout() {
-  token = null; clearSession();
-  g('login-screen').style.display = 'flex';
+g('l-pw').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+function doLogout(){ token=null; clearSession(); warnShown=false; g('sess-warn').style.display='none'; g('login-screen').style.display='flex'; }
+function startApp(email){
+  g('login-screen').style.display='none';
+  g('sb-av').textContent=(email||'?')[0].toUpperCase();
+  g('sb-name').textContent=email;
+  g('set-admin-url').value=location.href;
+  loadSettings(); loadAll(); renderLog(); startSessionWatch();
 }
-
-function startApp(email) {
-  g('login-screen').style.display = 'none';
-  var av = (email||'?')[0].toUpperCase();
-  g('sb-av').textContent = av;
-  g('sb-name').textContent = email;
-  loadAll();
-}
-
-// Auto-restore session
-(function(){
-  var s = loadSession();
-  if (s) { token = s.tok; startApp(s.email); }
-})();
+(function(){ var s=loadSession(); if(s){token=s.tok;startApp(s.email);} })();
 
 // ── NAV ──
-var paneNames = { dashboard:'Dashboard', termine:'Termine', galerie:'Galerie', musiker:'Musiker' };
-var paneSubs  = { dashboard:'Übersicht & Schnellzugriff', termine:'Aktuelle & archivierte Termine', galerie:'Fotos verwalten', musiker:'Besetzung verwalten' };
-function goPane(name) {
-  document.querySelectorAll('.pane').forEach(function(p){ p.classList.remove('on'); });
-  document.querySelectorAll('.sb-item').forEach(function(i){ i.classList.remove('active'); });
-  g('pane-'+name).classList.add('on');
-  g('nav-'+name).classList.add('active');
-  g('topbar-title').textContent = paneNames[name];
-  g('topbar-sub').textContent = paneSubs[name];
-  closeSidebar();
+var PANES={dashboard:'Dashboard',termine:'Termine',galerie:'Galerie',musiker:'Musiker',log:'Aktivitätslog',einstellungen:'Einstellungen'};
+var SUBS={dashboard:'Übersicht & Schnellzugriff',termine:'Termine verwalten',galerie:'Fotos & Sortierung',musiker:'Besetzung & Sortierung',log:'Letzte 30 Aktionen',einstellungen:'Band-Konfiguration'};
+function goPane(name){
+  document.querySelectorAll('.pane').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('active');});
+  g('pane-'+name).classList.add('on'); g('nav-'+name).classList.add('active');
+  g('tb-title').textContent=PANES[name]; g('tb-sub').textContent=SUBS[name];
+  closeSidebar(); if(name==='log') renderLog();
 }
-
-// ── SUBTABS ──
-function switchSubTab(tab) {
-  g('stab-aktuell').classList.toggle('on', tab==='aktuell');
-  g('stab-archiv').classList.toggle('on', tab==='archiv');
-  g('list-termine-aktuell').style.display = tab==='aktuell'?'':'none';
-  g('list-termine-archiv').style.display  = tab==='archiv'?'':'none';
+function openSidebar(){g('sidebar').classList.add('mob-open');g('mob-overlay').classList.add('on');}
+function closeSidebar(){g('sidebar').classList.remove('mob-open');g('mob-overlay').classList.remove('on');}
+function switchTermineTab(tab){
+  g('stab-akt').classList.toggle('on',tab==='akt'); g('stab-arc').classList.toggle('on',tab==='arc');
+  g('list-t-akt').style.display=tab==='akt'?'':'none'; g('list-t-arc').style.display=tab==='arc'?'':'none';
 }
-
-// ── MOBILE SIDEBAR ──
-function openSidebar()  { g('sidebar').classList.add('mob-open'); g('mob-overlay').classList.add('on'); }
-function closeSidebar() { g('sidebar').classList.remove('mob-open'); g('mob-overlay').classList.remove('on'); }
 
 // ── LOAD ALL ──
-function loadAll() { loadTermine(); loadGalerie(); loadMusiker(); }
+function loadAll(){loadTermine();loadGalerie();loadMusiker();}
 
 // ── TERMINE ──
-async function loadTermine() {
-  g('list-termine-aktuell').innerHTML = '<div class="loading">Lade Termine…</div>';
-  g('list-termine-archiv').innerHTML  = '<div class="loading">Lade Archiv…</div>';
-  try {
-    allTermine = await sb('/rest/v1/termine?select=*&order=datum.asc', 'GET');
-    var future = allTermine.filter(function(t){ return  isFuture(t.datum); });
-    var past   = allTermine.filter(function(t){ return !isFuture(t.datum); }).reverse();
-    // Badges & stats
-    g('bdg-termine').textContent = future.length;
-    g('bdg-termine').className   = 'badge' + (future.length===0?' arc':'');
-    g('st-termine').textContent  = future.length;
-    g('st-archiv').textContent   = past.length;
-    // Aktuell
-    g('list-termine-aktuell').innerHTML = future.length ? future.map(function(t){ return termineCard(t,false); }).join('') : '<div class="empty">Keine aktuellen Termine vorhanden.</div>';
-    // Archiv
-    g('list-termine-archiv').innerHTML  = past.length ? past.map(function(t){ return termineCard(t,true); }).join('') : '<div class="empty">Noch keine archivierten Termine.</div>';
-  } catch(e) {
-    g('list-termine-aktuell').innerHTML = '<div class="empty">Fehler: '+e.message+'</div>';
-    g('list-termine-archiv').innerHTML  = '';
-  }
+async function loadTermine(){
+  g('list-t-akt').innerHTML='<div class="loading">Lade…</div>';
+  g('list-t-arc-inner').innerHTML='<div class="loading">Lade…</div>';
+  try{
+    allTermine=await sb('/rest/v1/termine?select=*&order=datum.asc','GET');
+    var fut=allTermine.filter(function(t){return isFuture(t.datum);});
+    var past=allTermine.filter(function(t){return !isFuture(t.datum);}).reverse();
+    g('bdg-t').textContent=fut.length; g('st-t').textContent=fut.length; g('st-a').textContent=past.length;
+    g('list-t-akt').innerHTML=fut.length?fut.map(function(t){return tCard(t,false);}).join(''):'<div class="empty">Keine aktuellen Termine.</div>';
+    g('list-t-arc-inner').innerHTML=past.length?past.map(function(t){return tCard(t,true);}).join(''):'<div class="empty">Noch keine archivierten Termine.</div>';
+  }catch(e){g('list-t-akt').innerHTML='<div class="empty">Fehler: '+e.message+'</div>';}
 }
-function termineCard(t, archived) {
+function tCard(t,arc){
   return '<div class="card">'+
     '<div class="card-thumb">🗓</div>'+
-    '<div class="card-info">'+
-      '<div class="card-name">'+esc(t.titel)+'</div>'+
-      '<div class="card-sub">'+fmtDate(t.datum)+(t.uhrzeit_von?' · '+t.uhrzeit_von:'')+(t.ort?' · '+esc(t.ort):'')+'</div>'+
-    '</div>'+
-    (archived?'<span class="arc-badge">Archiv</span>':'')+
+    '<div class="card-info"><div class="card-name">'+esc(t.titel)+'</div><div class="card-sub">'+fmtDate(t.datum)+(t.uhrzeit_von?' · '+esc(t.uhrzeit_von):'')+(t.ort?' · '+esc(t.ort):'')+'</div></div>'+
+    (arc?'<span class="arc-tag">Archiv</span>':'')+
     '<div class="card-btns">'+
-      '<button class="btn btn-sm btn-e" onclick="editEntry(\'termin\',\''+t.id+'\')">Bearbeiten</button>'+
-      '<button class="btn btn-sm btn-d" onclick="delEntry(\'termine\',\''+t.id+'\',loadTermine)">Löschen</button>'+
-    '</div>'+
-  '</div>';
+      '<button class="btn btn-sm btn-dup" onclick="dupTermin(\''+t.id+'\')">⧉</button>'+
+      '<button class="btn btn-sm btn-e" onclick="editEntry(\'termin\',\''+t.id+'\')">Bearb.</button>'+
+      '<button class="btn btn-sm btn-d" onclick="delEntry(\'termine\',\''+t.id+'\',loadTermine)">Lösch.</button>'+
+    '</div></div>';
+}
+async function dupTermin(id){
+  try{
+    var rows=await sb('/rest/v1/termine?id=eq.'+id+'&select=*','GET');
+    if(!rows||!rows.length) return;
+    var d=Object.assign({},rows[0]); delete d.id; delete d.created_at; d.titel='Kopie: '+d.titel;
+    openModal('termin',d); mId=null;
+    toast('Termin zum Duplizieren geöffnet.','info');
+  }catch(e){toast('Fehler: '+e.message,'err');}
+}
+async function bulkClearArchive(){
+  var past=allTermine.filter(function(t){return !isFuture(t.datum);});
+  if(!past.length){toast('Kein Archiv vorhanden.','info');return;}
+  if(!confirm('Alle '+past.length+' archivierten Termine löschen? Das kann nicht rückgängig gemacht werden.')) return;
+  try{
+    await sb('/rest/v1/termine?datum=lt.'+new Date().toISOString().split('T')[0],'DELETE');
+    logAct('del','termin',past.length+' Archiv-Termine');
+    toast('Archiv geleert.','ok'); loadTermine();
+  }catch(e){toast('Fehler: '+e.message,'err');}
 }
 
 // ── GALERIE ──
-async function loadGalerie() {
-  g('list-galerie').innerHTML = '<div class="loading">Lade Galerie…</div>';
-  try {
-    var rows = await sb('/rest/v1/galerie?select=*&order=reihenfolge.asc', 'GET');
-    g('bdg-galerie').textContent = rows.length;
-    g('st-galerie').textContent  = rows.length;
-    g('list-galerie').innerHTML  = rows.length ? rows.map(function(r){
-      return '<div class="card">'+
-        '<div class="card-thumb">'+(r.bild_url?'<img src="'+r.bild_url+'" alt="">':'🖼')+'</div>'+
-        '<div class="card-info"><div class="card-name">'+esc(r.titel)+'</div><div class="card-sub">'+(r.jahr||'')+(r.breit?' · Panorama':'')+'</div></div>'+
-        '<div class="card-btns">'+
-          '<button class="btn btn-sm btn-e" onclick="editEntry(\'galerie\',\''+r.id+'\')">Bearbeiten</button>'+
-          '<button class="btn btn-sm btn-d" onclick="delEntry(\'galerie\',\''+r.id+'\',loadGalerie)">Löschen</button>'+
-        '</div></div>';
-    }).join('') : '<div class="empty">Noch keine Fotos vorhanden.</div>';
-  } catch(e) { g('list-galerie').innerHTML = '<div class="empty">Fehler: '+e.message+'</div>'; }
+async function loadGalerie(){
+  g('list-g').innerHTML='<div class="loading">Lade…</div>';
+  try{
+    galerieItems=await sb('/rest/v1/galerie?select=*&order=reihenfolge.asc','GET');
+    g('bdg-g').textContent=galerieItems.length; g('st-g').textContent=galerieItems.length;
+    renderGalerie();
+  }catch(e){g('list-g').innerHTML='<div class="empty">Fehler: '+e.message+'</div>';}
+}
+function renderGalerie(){
+  g('list-g').innerHTML=galerieItems.length?galerieItems.map(function(r,i){
+    return '<div class="card" draggable="true" id="gc-'+r.id+'"'+
+      ' ondragstart="onDS(event,'+i+',\'galerie\')" ondragend="onDE(event)"'+
+      ' ondragover="onDO(event,'+i+')" ondrop="onDrop(event,'+i+',\'galerie\')"'+
+      ' ondragenter="this.classList.add(\'drag-over\')" ondragleave="this.classList.remove(\'drag-over\')">'+
+      '<span class="drag-handle" title="Ziehen zum Sortieren">⠿</span>'+
+      '<div class="card-thumb">'+(r.bild_url?'<img src="'+r.bild_url+'" alt="'+esc(r.titel)+'" onclick="openImgLb(\''+r.bild_url+'\')">':'🖼')+'</div>'+
+      '<div class="card-info"><div class="card-name">'+esc(r.titel)+'</div><div class="card-sub">'+(r.jahr||'')+(r.breit?' · Panorama':'')+'</div></div>'+
+      '<div class="card-btns">'+
+        '<button class="btn btn-sm btn-e" onclick="editEntry(\'galerie\',\''+r.id+'\')">Bearb.</button>'+
+        '<button class="btn btn-sm btn-d" onclick="delEntry(\'galerie\',\''+r.id+'\',loadGalerie)">Lösch.</button>'+
+      '</div></div>';
+  }).join(''):'<div class="empty">Noch keine Fotos vorhanden.</div>';
 }
 
 // ── MUSIKER ──
-async function loadMusiker() {
-  g('list-musiker').innerHTML = '<div class="loading">Lade Musiker…</div>';
-  try {
-    var rows = await sb('/rest/v1/musiker?select=*&order=reihenfolge.asc', 'GET');
-    g('bdg-musiker').textContent = rows.length;
-    g('st-musiker').textContent  = rows.length;
-    g('list-musiker').innerHTML  = rows.length ? rows.map(function(m){
-      var ini = m.name.split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2).toUpperCase();
-      return '<div class="card">'+
-        '<div class="card-thumb">'+(m.bild_url?'<img src="'+m.bild_url+'" alt="">':ini)+'</div>'+
-        '<div class="card-info"><div class="card-name">'+esc(m.name)+'</div><div class="card-sub">'+esc(m.instrument||'')+(m.register?' · '+esc(m.register):'')+'</div></div>'+
-        '<div class="card-btns">'+
-          '<button class="btn btn-sm btn-e" onclick="editEntry(\'musiker\',\''+m.id+'\')">Bearbeiten</button>'+
-          '<button class="btn btn-sm btn-d" onclick="delEntry(\'musiker\',\''+m.id+'\',loadMusiker)">Löschen</button>'+
-        '</div></div>';
-    }).join('') : '<div class="empty">Noch keine Musiker vorhanden.</div>';
-  } catch(e) { g('list-musiker').innerHTML = '<div class="empty">Fehler: '+e.message+'</div>'; }
+async function loadMusiker(){
+  g('list-m').innerHTML='<div class="loading">Lade…</div>';
+  try{
+    musikerItems=await sb('/rest/v1/musiker?select=*&order=reihenfolge.asc','GET');
+    g('bdg-m').textContent=musikerItems.length; g('st-m').textContent=musikerItems.length;
+    renderMusiker();
+  }catch(e){g('list-m').innerHTML='<div class="empty">Fehler: '+e.message+'</div>';}
+}
+function renderMusiker(){
+  g('list-m').innerHTML=musikerItems.length?musikerItems.map(function(m,i){
+    var ini=m.name.split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2).toUpperCase();
+    return '<div class="card" draggable="true" id="mc-'+m.id+'"'+
+      ' ondragstart="onDS(event,'+i+',\'musiker\')" ondragend="onDE(event)"'+
+      ' ondragover="onDO(event,'+i+')" ondrop="onDrop(event,'+i+',\'musiker\')"'+
+      ' ondragenter="this.classList.add(\'drag-over\')" ondragleave="this.classList.remove(\'drag-over\')">'+
+      '<span class="drag-handle" title="Ziehen zum Sortieren">⠿</span>'+
+      '<div class="card-thumb">'+(m.bild_url?'<img src="'+m.bild_url+'" alt="'+esc(m.name)+'" onclick="openImgLb(\''+m.bild_url+'\')">':ini)+'</div>'+
+      '<div class="card-info"><div class="card-name">'+esc(m.name)+'</div><div class="card-sub">'+esc(m.instrument||'')+(m.register?' · '+esc(m.register):'')+'</div></div>'+
+      '<div class="card-btns">'+
+        '<button class="btn btn-sm btn-e" onclick="editEntry(\'musiker\',\''+m.id+'\')">Bearb.</button>'+
+        '<button class="btn btn-sm btn-d" onclick="delEntry(\'musiker\',\''+m.id+'\',loadMusiker)">Lösch.</button>'+
+      '</div></div>';
+  }).join(''):'<div class="empty">Noch keine Musiker vorhanden.</div>';
+}
+
+// ── DRAG & DROP ──
+function onDS(e,idx,type){dragIdx=idx;dragType=type;e.dataTransfer.effectAllowed='move';setTimeout(function(){e.target.classList.add('dragging');},0);}
+function onDE(e){e.target.classList.remove('dragging');}
+function onDO(e,idx){e.preventDefault();e.dataTransfer.dropEffect='move';}
+function onDrop(e,targetIdx,type){
+  e.preventDefault();
+  document.querySelectorAll('.card').forEach(function(c){c.classList.remove('drag-over');});
+  if(dragIdx===targetIdx||dragType!==type) return;
+  var arr=type==='galerie'?galerieItems:musikerItems;
+  var item=arr.splice(dragIdx,1)[0]; arr.splice(targetIdx,0,item);
+  if(type==='galerie') renderGalerie(); else renderMusiker();
+  saveDragOrder(type,arr);
+}
+async function saveDragOrder(type,arr){
+  var dsEl=g('ds-'+type); if(dsEl) dsEl.style.display='block';
+  try{
+    for(var i=0;i<arr.length;i++) await sb('/rest/v1/'+type+'?id=eq.'+arr[i].id,'PATCH',{reihenfolge:i});
+    toast('Reihenfolge gespeichert.','ok');
+  }catch(e){toast('Fehler beim Speichern: '+e.message,'err');}
+  if(dsEl) dsEl.style.display='none';
+}
+
+// ── IMAGE LIGHTBOX ──
+function openImgLb(src){g('img-lb-src').src=src;g('img-lb').classList.add('on');document.body.style.overflow='hidden';}
+function closeImgLb(){g('img-lb').classList.remove('on');document.body.style.overflow='';}
+
+// ── SETTINGS ──
+function loadSettings(){
+  try{
+    var s=JSON.parse(localStorage.getItem('sw_settings')||'{}');
+    ['name','email','phone','ort','web','ig','fb','yt'].forEach(function(k){
+      var el=g('set-'+k); if(el&&s[k]) el.value=s[k];
+    });
+  }catch(e){}
+}
+function saveSettings(){
+  try{
+    var s={};
+    ['name','email','phone','ort','web','ig','fb','yt'].forEach(function(k){s[k]=val('set-'+k);});
+    localStorage.setItem('sw_settings',JSON.stringify(s));
+    toast('Einstellungen gespeichert.','ok');
+  }catch(e){toast('Fehler beim Speichern.','err');}
 }
 
 // ── MODAL ──
-function openModal(type, data) {
-  data = data || {};
-  mType = type; mId = data.id || null; imgUrl = data.bild_url || null;
-  var titles = { termin: mId?'Termin bearbeiten':'Neuer Termin', galerie: mId?'Foto bearbeiten':'Neues Foto', musiker: mId?'Musiker bearbeiten':'Neuer Musiker' };
-  g('m-title').textContent = titles[type];
-  g('m-body').innerHTML = buildForm(type, data);
-  g('modal-bg').style.display = 'flex';
-  setupUpload();
+function openModal(type,data){
+  data=data||{}; mType=type; mId=data.id||null; imgUrl=data.bild_url||null;
+  var titles={termin:mId?'Termin bearbeiten':'Neuer Termin',galerie:mId?'Foto bearbeiten':'Neues Foto',musiker:mId?'Musiker bearbeiten':'Neuer Musiker'};
+  g('m-title').textContent=titles[type]; g('m-body').innerHTML=buildForm(type,data); g('modal-bg').style.display='flex'; setupUpload();
 }
-function closeModal() { g('modal-bg').style.display='none'; mType=null; mId=null; imgUrl=null; }
+function closeModal(){g('modal-bg').style.display='none';mType=null;mId=null;imgUrl=null;}
 
-function togHTML(id, label, checked) {
-  return '<div class="tog-row">'+
+function togHTML(id,lbl,checked){
+  return '<div class="tog-row" onclick="var c=document.getElementById(\''+id+'\');c.checked=!c.checked;">'+
     '<div class="tog-wrap">'+
       '<input type="checkbox" class="tog-inp" id="'+id+'"'+(checked?' checked':'')+'>'+
       '<label class="tog-track" for="'+id+'"></label>'+
       '<label class="tog-thumb" for="'+id+'"></label>'+
     '</div>'+
-    '<label class="tog-lbl" for="'+id+'">'+label+'</label>'+
-  '</div>';
+    '<span class="tog-lbl">'+lbl+'</span></div>';
 }
-
-function uploadHTML(url) {
+function upHTML(url){
   return '<div class="fg"><label>Foto</label>'+
     '<div class="uploader" onclick="g(\'f-file\').click()">'+
       '<input type="file" id="f-file" accept="image/*" style="display:none">'+
       '<div class="up-ico">📷</div>'+
       '<div class="up-txt">Klicken zum Auswählen · <strong>JPG, PNG, WEBP</strong></div>'+
-      (url?'<img class="up-prev" src="'+url+'" alt="">':'<img class="up-prev" id="f-prev" style="display:none" alt="">')+
+      '<img class="up-prev" id="f-prev"'+(url?' src="'+url+'"':' style="display:none"')+' alt="">'+
     '</div>'+
     '<div class="up-prog-w" id="f-prog-w"><div class="up-prog" id="f-prog"></div></div>'+
     '<div class="up-status" id="f-status">'+(url?'✓ Bild vorhanden':'Noch kein Bild')+'</div></div>';
 }
+function fg(l,i){return '<div class="fg"><label>'+l+'</label>'+i+'</div>';}
 
-function fg(lbl, inp) { return '<div class="fg"><label>'+lbl+'</label>'+inp+'</div>'; }
-
-function buildForm(type, d) {
-  if (type === 'termin') {
+function buildForm(type,d){
+  if(type==='termin'){
     return fg('Titel *','<input id="f-titel" value="'+esc(d.titel||'')+'" placeholder="Sommerfest Musterverein">')+
       '<div class="frow">'+fg('Datum *','<input id="f-datum" type="date" value="'+(d.datum||'')+'">')+fg('Uhrzeit von','<input id="f-von" value="'+esc(d.uhrzeit_von||'')+'" placeholder="19:00">')+'</div>'+
-      '<div class="frow">'+fg('Uhrzeit bis','<input id="f-bis" value="'+esc(d.uhrzeit_bis||'')+'" placeholder="22:00">')+fg('Reihenfolge','<input id="f-sort" type="number" value="0">')+'</div>'+
+      fg('Uhrzeit bis','<input id="f-bis" value="'+esc(d.uhrzeit_bis||'')+'" placeholder="22:00">')+
       fg('Veranstaltungsort','<input id="f-ort" value="'+esc(d.ort||'')+'" placeholder="Festplatz Musterhausen">')+
       fg('Adresse','<input id="f-adresse" value="'+esc(d.adresse||'')+'" placeholder="Musterstraße 1, 12345 Musterstadt">')+
       fg('Google Maps Link','<input id="f-maps" value="'+esc(d.maps_link||'')+'" placeholder="https://maps.google.com/...">')+
-      togHTML('f-frei','Freier Eintritt', !!d.eintritt_frei);
+      togHTML('f-frei','Freier Eintritt',!!d.eintritt_frei);
   }
-  if (type === 'galerie') {
+  if(type==='galerie'){
     return fg('Titel *','<input id="f-titel" value="'+esc(d.titel||'')+'" placeholder="z.B. Sommerfest 2024">')+
       '<div class="frow">'+fg('Jahr','<input id="f-jahr" type="number" value="'+(d.jahr||'')+'" placeholder="2024">')+fg('Reihenfolge','<input id="f-sort" type="number" value="'+(d.reihenfolge||0)+'">')+'</div>'+
-      togHTML('f-breit','Panorama-Format (doppelt breit)', !!d.breit)+
-      uploadHTML(d.bild_url);
+      togHTML('f-breit','Panorama-Format (doppelt breit)',!!d.breit)+
+      upHTML(d.bild_url);
   }
-  if (type === 'musiker') {
-    var regs = ['Trompete & Flügelhorn','Holzregister','Mittleres Blech & Horn','Maschinenraum & Gesang'];
-    var opts = '<option value="">Bitte wählen</option>'+regs.map(function(r){return'<option'+(d.register===r?' selected':'')+'>'+r+'</option>';}).join('');
+  if(type==='musiker'){
+    var regs=['Trompete & Flügelhorn','Holzregister','Mittleres Blech & Horn','Maschinenraum & Gesang'];
+    var opts='<option value="">Bitte wählen</option>'+regs.map(function(r){return'<option'+(d.register===r?' selected':'')+'>'+r+'</option>';}).join('');
     return '<div class="frow">'+fg('Name *','<input id="f-name" value="'+esc(d.name||'')+'" placeholder="Max Mustermann">')+fg('Reihenfolge','<input id="f-sort" type="number" value="'+(d.reihenfolge||0)+'">')+'</div>'+
       '<div class="frow">'+fg('Instrument','<input id="f-instr" value="'+esc(d.instrument||'')+'" placeholder="Trompete">')+fg('Register','<select id="f-reg">'+opts+'</select>')+'</div>'+
       fg('Beschreibung','<textarea id="f-desc">'+esc(d.beschreibung||'')+'</textarea>')+
-      uploadHTML(d.bild_url);
+      upHTML(d.bild_url);
   }
   return '';
 }
 
-function setupUpload() {
-  var inp = g('f-file');
-  if (!inp) return;
-  inp.addEventListener('change', async function(e) {
-    var file = e.target.files[0]; if (!file) return;
-    var prev=g('f-prev')||document.querySelector('.up-prev'), progW=g('f-prog-w'), prog=g('f-prog'), status=g('f-status');
-    if (prev) { prev.src=URL.createObjectURL(file); prev.style.display='block'; }
-    if (progW) progW.style.display='block'; if (prog) prog.style.width='30%';
-    if (status) status.textContent='Wird hochgeladen…';
-    try {
-      if (prog) prog.style.width='70%';
-      imgUrl = await uploadImg(file);
-      if (prog) prog.style.width='100%';
-      if (status) status.textContent='✓ Hochgeladen';
-      setTimeout(function(){ if(progW) progW.style.display='none'; },800);
-    } catch(err) {
-      if (status) status.textContent='✗ Fehler: '+err.message;
-      if (progW) progW.style.display='none';
-    }
+function setupUpload(){
+  var inp=g('f-file'); if(!inp) return;
+  inp.addEventListener('change',async function(e){
+    var file=e.target.files[0]; if(!file) return;
+    var prev=g('f-prev'),progW=g('f-prog-w'),prog=g('f-prog'),status=g('f-status');
+    if(prev){prev.src=URL.createObjectURL(file);prev.style.display='block';}
+    if(progW) progW.style.display='block'; if(prog) prog.style.width='30%';
+    if(status) status.textContent='Wird hochgeladen…';
+    try{
+      if(prog) prog.style.width='70%';
+      imgUrl=await uploadImg(file);
+      if(prog) prog.style.width='100%';
+      if(status) status.textContent='✓ Hochgeladen';
+      setTimeout(function(){if(progW)progW.style.display='none';},800);
+    }catch(err){if(status)status.textContent='✗ Fehler: '+err.message;if(progW)progW.style.display='none';}
   });
 }
 
 // ── SAVE ──
-async function doSave() {
-  var type = mType, id = mId;
-  var btn = g('m-save'); btn.disabled=true; btn.textContent='Speichern…';
-  try {
-    var body = null, table = '';
-    if (type === 'termin') {
-      table = 'termine';
-      var titel = val('f-titel');
-      if (!titel) { toast('Bitte Titel ausfüllen.','err'); return; }
-      var dateEl = g('f-datum');
-      var datumISO = dateEl.valueAsDate
-        ? (function(vd){ var m=vd.getUTCMonth()+1,dy=vd.getUTCDate(); return vd.getUTCFullYear()+'-'+(m<10?'0'+m:m)+'-'+(dy<10?'0'+dy:dy); })(dateEl.valueAsDate)
-        : parseDate(dateEl.value);
-      if (!datumISO) { toast('Bitte Datum auswählen.','err'); return; }
-      body = { titel:titel, datum:datumISO, uhrzeit_von:val('f-von'), uhrzeit_bis:val('f-bis'), ort:val('f-ort'), adresse:val('f-adresse'), maps_link:val('f-maps'), eintritt_frei:togVal('f-frei') };
-    } else if (type === 'galerie') {
-      table = 'galerie';
-      var titel = val('f-titel');
-      if (!titel) { toast('Bitte Titel ausfüllen.','err'); return; }
-      body = { titel:titel, jahr:toInt('f-jahr')||null, breit:togVal('f-breit'), reihenfolge:toInt('f-sort'), bild_url:imgUrl };
-    } else if (type === 'musiker') {
-      table = 'musiker';
-      var name = val('f-name');
-      if (!name) { toast('Bitte Name ausfüllen.','err'); return; }
-      body = { name:name, instrument:val('f-instr'), register:val('f-reg'), beschreibung:val('f-desc'), reihenfolge:toInt('f-sort'), bild_url:imgUrl };
+async function doSave(){
+  var type=mType,id=mId;
+  var btn=g('m-save'); btn.disabled=true; btn.textContent='Speichern…';
+  try{
+    var body=null,table='';
+    if(type==='termin'){
+      table='termine'; var titel=val('f-titel');
+      if(!titel){toast('Bitte Titel ausfüllen.','err');return;}
+      var dateEl=g('f-datum');
+      var datumISO=dateEl.valueAsDate
+        ?(function(vd){var m=vd.getUTCMonth()+1,dy=vd.getUTCDate();return vd.getUTCFullYear()+'-'+(m<10?'0'+m:m)+'-'+(dy<10?'0'+dy:dy);})(dateEl.valueAsDate)
+        :parseDate(dateEl.value);
+      if(!datumISO){toast('Bitte Datum auswählen.','err');return;}
+      body={titel,datum:datumISO,uhrzeit_von:val('f-von'),uhrzeit_bis:val('f-bis'),ort:val('f-ort'),adresse:val('f-adresse'),maps_link:val('f-maps'),eintritt_frei:togVal('f-frei')};
+    }else if(type==='galerie'){
+      table='galerie'; var titel=val('f-titel');
+      if(!titel){toast('Bitte Titel ausfüllen.','err');return;}
+      body={titel,jahr:toInt('f-jahr')||null,breit:togVal('f-breit'),reihenfolge:toInt('f-sort'),bild_url:imgUrl};
+    }else if(type==='musiker'){
+      table='musiker'; var name=val('f-name');
+      if(!name){toast('Bitte Name ausfüllen.','err');return;}
+      body={name,instrument:val('f-instr'),register:val('f-reg'),beschreibung:val('f-desc'),reihenfolge:toInt('f-sort'),bild_url:imgUrl};
     }
-    if (id) { await sb('/rest/v1/'+table+'?id=eq.'+id,'PATCH',body); }
-    else     { await sb('/rest/v1/'+table,'POST',body,{'Prefer':'return=minimal'}); }
+    if(id){ await sb('/rest/v1/'+table+'?id=eq.'+id,'PATCH',body); logAct('edit',type,body.titel||body.name||'–'); }
+    else   { await sb('/rest/v1/'+table,'POST',body,{'Prefer':'return=minimal'}); logAct('add',type,body.titel||body.name||'–'); }
     toast(id?'Aktualisiert!':'Gespeichert!','ok');
     closeModal();
-    if(type==='termin') loadTermine(); else if(type==='galerie') loadGalerie(); else loadMusiker();
-  } catch(e) { toast('Fehler: '+e.message,'err'); }
+    if(type==='termin')loadTermine(); else if(type==='galerie')loadGalerie(); else loadMusiker();
+  }catch(e){toast('Fehler: '+e.message,'err');}
   btn.disabled=false; btn.textContent='Speichern';
 }
 
 // ── EDIT & DELETE ──
-async function editEntry(type, id) {
-  var table = type==='termin'?'termine':type;
-  try {
-    var rows = await sb('/rest/v1/'+table+'?id=eq.'+id+'&select=*','GET');
-    if (!rows||!rows.length) throw new Error('Nicht gefunden');
-    openModal(type, rows[0]); mId=id;
-  } catch(e) { toast('Fehler: '+e.message,'err'); }
+async function editEntry(type,id){
+  var table=type==='termin'?'termine':type;
+  try{ var rows=await sb('/rest/v1/'+table+'?id=eq.'+id+'&select=*','GET'); if(!rows||!rows.length) throw new Error('Nicht gefunden'); openModal(type,rows[0]); mId=id; }
+  catch(e){toast('Fehler: '+e.message,'err');}
 }
-async function delEntry(table, id, reload) {
-  if (!confirm('Eintrag wirklich löschen?')) return;
-  try { await sb('/rest/v1/'+table+'?id=eq.'+id,'DELETE'); toast('Gelöscht.','ok'); reload(); }
-  catch(e) { toast('Fehler: '+e.message,'err'); }
+async function delEntry(table,id,reload){
+  if(!confirm('Eintrag wirklich löschen?')) return;
+  try{
+    var typeMap={'termine':'termin','galerie':'galerie','musiker':'musiker'};
+    var rows=await sb('/rest/v1/'+table+'?id=eq.'+id+'&select=*','GET');
+    var name=rows&&rows[0]?(rows[0].titel||rows[0].name||'–'):'–';
+    await sb('/rest/v1/'+table+'?id=eq.'+id,'DELETE');
+    logAct('del',typeMap[table]||table,name);
+    toast('Gelöscht.','ok'); reload();
+  }catch(e){toast('Fehler: '+e.message,'err');}
 }
 
 // ── KEYBOARD ──
-document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal(); });
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModal();closeImgLb();}});
 </script>
 </body>
 </html>
