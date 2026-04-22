@@ -263,6 +263,7 @@ a{color:inherit;text-decoration:none}
     <div class="sb-sec">System</div>
     <div class="sb-item" onclick="goPane('log')" id="nav-log"><span class="ico">📋</span>Aktivitätslog</div>
     <div class="sb-item" onclick="goPane('einstellungen')" id="nav-einstellungen"><span class="ico">⚙</span>Einstellungen</div>
+    <div class="sb-item" onclick="goPane('rechtliches')" id="nav-rechtliches"><span class="ico">📄</span>Rechtliches</div>
   </nav>
   <div class="sb-bottom">
     <div class="sb-user">
@@ -344,7 +345,33 @@ a{color:inherit;text-decoration:none}
       <div class="list" id="list-m"></div>
     </div>
 
-    <!-- AKTIVITÄTSLOG -->
+    <!-- RECHTLICHES -->
+    <div class="pane" id="pane-rechtliches">
+      <div class="pane-head"><div class="pane-ttl">Rechtliches</div></div>
+      <div class="set-note">✏ Hier kannst du Impressum und Datenschutzerklärung bearbeiten. Die Texte werden direkt auf der Website angezeigt. HTML-Formatierung ist erlaubt (z.B. &lt;h2&gt;, &lt;p&gt;, &lt;a href="..."&gt;).</div>
+
+      <div class="set-card">
+        <div class="set-card-ttl">Impressum</div>
+        <div class="fg"><label>Inhalt (HTML)</label><textarea id="legal-impressum" style="min-height:280px;font-family:monospace;font-size:.82rem" placeholder="&lt;h2&gt;Angaben gemäß § 5 TMG&lt;/h2&gt;&#10;&lt;p&gt;...&lt;/p&gt;"></textarea></div>
+        <div style="display:flex;gap:.65rem;align-items:center;margin-top:.25rem">
+          <button class="btn btn-p" onclick="saveLegal('impressum')">Impressum speichern</button>
+          <span class="fg-hint" id="legal-impressum-status"></span>
+        </div>
+      </div>
+
+      <div class="set-card">
+        <div class="set-card-ttl">Datenschutzerklärung</div>
+        <div class="fg"><label>Inhalt (HTML)</label><textarea id="legal-datenschutz" style="min-height:280px;font-family:monospace;font-size:.82rem" placeholder="&lt;h2&gt;Datenschutzerklärung&lt;/h2&gt;&#10;&lt;p&gt;...&lt;/p&gt;"></textarea></div>
+        <div style="display:flex;gap:.65rem;align-items:center;margin-top:.25rem">
+          <button class="btn btn-p" onclick="saveLegal('datenschutz')">Datenschutz speichern</button>
+          <span class="fg-hint" id="legal-datenschutz-status"></span>
+        </div>
+      </div>
+
+      <div class="set-note" style="margin-top:.5rem">💡 Tipp: Nutze &lt;h2&gt; für Überschriften, &lt;p&gt; für Absätze und &lt;a href="mailto:..."&gt; für E-Mail-Links.</div>
+    </div>
+
+
     <div class="pane" id="pane-log">
       <div class="pane-head">
         <div class="pane-ttl">Aktivitätslog</div>
@@ -543,19 +570,21 @@ function startApp(email){
   g('sb-av').textContent=(email||'?')[0].toUpperCase();
   g('sb-name').textContent=email;
   g('set-admin-url').value=location.href;
-  loadSettings(); loadAll(); renderLog(); startSessionWatch();
+  loadSettings(); loadLegal(); loadAll(); renderLog(); startSessionWatch();
 }
 (function(){ var s=loadSession(); if(s){token=s.tok;startApp(s.email);} })();
 
 // ── NAV ──
-var PANES={dashboard:'Dashboard',termine:'Termine',galerie:'Galerie',musiker:'Musiker',log:'Aktivitätslog',einstellungen:'Einstellungen'};
-var SUBS={dashboard:'Übersicht & Schnellzugriff',termine:'Termine verwalten',galerie:'Fotos & Sortierung',musiker:'Besetzung & Sortierung',log:'Letzte 30 Aktionen',einstellungen:'Band-Konfiguration'};
+var PANES={dashboard:'Dashboard',termine:'Termine',galerie:'Galerie',musiker:'Musiker',log:'Aktivitätslog',einstellungen:'Einstellungen',rechtliches:'Rechtliches'};
+var SUBS={dashboard:'Übersicht & Schnellzugriff',termine:'Termine verwalten',galerie:'Fotos & Sortierung',musiker:'Besetzung & Sortierung',log:'Letzte 30 Aktionen',einstellungen:'Band-Konfiguration',rechtliches:'Impressum & Datenschutz'};
 function goPane(name){
   document.querySelectorAll('.pane').forEach(function(p){p.classList.remove('on');});
   document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('active');});
   g('pane-'+name).classList.add('on'); g('nav-'+name).classList.add('active');
   g('tb-title').textContent=PANES[name]; g('tb-sub').textContent=SUBS[name];
-  closeSidebar(); if(name==='log') renderLog();
+  closeSidebar();
+  if(name==='log') renderLog();
+  if(name==='rechtliches') loadLegal();
 }
 function openSidebar(){g('sidebar').classList.add('mob-open');g('mob-overlay').classList.add('on');}
 function closeSidebar(){g('sidebar').classList.remove('mob-open');g('mob-overlay').classList.remove('on');}
@@ -688,7 +717,27 @@ async function saveDragOrder(type,arr){
 function openImgLb(src){g('img-lb-src').src=src;g('img-lb').classList.add('on');document.body.style.overflow='hidden';}
 function closeImgLb(){g('img-lb').classList.remove('on');document.body.style.overflow='';}
 
-// ── SETTINGS ──
+// ── RECHTLICHES ──
+async function loadLegal() {
+  try {
+    var rows = await sb('/rest/v1/seiten?select=slug,inhalt', 'GET');
+    rows.forEach(function(r) {
+      var el = document.getElementById('legal-' + r.slug);
+      if (el) el.value = r.inhalt || '';
+    });
+  } catch(e) { toast('Fehler beim Laden der Texte: ' + e.message, 'err'); }
+}
+async function saveLegal(slug) {
+  var inhalt = (document.getElementById('legal-' + slug) || {}).value || '';
+  var statusEl = document.getElementById('legal-' + slug + '-status');
+  try {
+    await sb('/rest/v1/seiten?slug=eq.' + slug, 'PATCH', { inhalt: inhalt, updated_at: new Date().toISOString() });
+    if (statusEl) { statusEl.textContent = '✓ Gespeichert'; statusEl.style.color = 'var(--grn)'; setTimeout(function(){ statusEl.textContent = ''; }, 3000); }
+    toast((slug === 'impressum' ? 'Impressum' : 'Datenschutz') + ' gespeichert.', 'ok');
+  } catch(e) { toast('Fehler: ' + e.message, 'err'); }
+}
+
+
 function loadSettings(){
   try{
     var s=JSON.parse(localStorage.getItem('sw_settings')||'{}');
